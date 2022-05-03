@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth;
 
 use App\Models\Projeto;
 use App\Models\User;
+use DB;
 
 class ProjetoController extends Controller
 {
@@ -83,7 +85,7 @@ class ProjetoController extends Controller
 
         $ProjectOwner = User::where('id', $Projeto->user_id)->first()->toArray();
 
-        return view('projetos.show',['Projeto'=>$Projeto, 'ProjectOwner' => $ProjectOwner, 'hasUserJoined' => $hasUserJoined]);
+        return view('projetos.show',['Projeto'=>$Projeto, 'ProjectOwner' => $ProjectOwner, 'hasUserJoined' => $hasUserJoined, 'user'=> $user]);
     }
 
     public function dashboard(){
@@ -117,11 +119,23 @@ class ProjetoController extends Controller
 
     }
 
-    public function part_request($user_requested_id){
-        
-    }
     public function main_layout(){
         $user = auth()->user();
         return view('layouts.main',['nomedousuario' => $user]);
+    }
+
+    public function teste_devolucao($id){
+        $ups = auth()->user()->projetos;
+        $situacaos = Projeto::findOrFail($id);
+        // $user_id = auth()->user()->id;
+        // $situacaos = DB::select(' select p.situacao, u.user_id from projeto_user p join users u where user_id = ?',
+        //     [$ups]);
+
+        return view('teste',
+        ['Projeto'=> $ups,
+        'situacaos'=> $situacaos]);
+        // $user = auth()->user();
+        // $pivot = DB::select('select * from projeto_user');
+        // return view('teste',['Projeto'=> $pivot, 'user'=>$user]);
     }
 }

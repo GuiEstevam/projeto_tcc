@@ -27,3 +27,5 @@ Route::get('/dashboard', [ProjetoController::class,'dashboard'])->middleware('au
 Route::get('/projetos/join/{id}', [ProjetoController::class,'joinProject'])->middleware('auth');
 
 Route::delete('/projetos/leave/{id}', [ProjetoController::class,'leaveProject'])->middleware('auth');
+
+Route::get('/teste/{id}',[ProjetoController::class,'teste_devolucao']);

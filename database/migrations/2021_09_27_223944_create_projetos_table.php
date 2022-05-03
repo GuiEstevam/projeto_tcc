@@ -20,7 +20,8 @@ class CreateProjetosTable extends Migration
             $table->text('campus');    
             $table->boolean('disponibility');
             $table->text('description');
-            $table->integer('user_id');
+            $table->string('image');
+            $table->integer('user_id')->constrained();
         });
     }
 

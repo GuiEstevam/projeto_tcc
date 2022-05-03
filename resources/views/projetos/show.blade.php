@@ -14,17 +14,19 @@
         <p class="event-city"><ion-icon name="location-outline"></ion-icon> {{ $Projeto->campus }}</p>
         <p class="events-participants"><ion-icon name="people-outline"></ion-icon> {{count($Projeto->users)}}  Alunos</p>
         <p class="event-owner"><ion-icon name="star-outline"></ion-icon> Orientador: {{ $ProjectOwner['name'] }}</p>
-        @if(!$hasUserJoined)
-        <form action="/projetos/join/{{ $Projeto->id }}" method="POST">
-          @csrf
-          <a href="/projetos/join/{{ $Projeto->id }}" 
-            class="btn btn-primary" 
-            id="event-submit"
-            onclick="Projeto.preventDefault();
-            this.closest('form').submit();">
-            Solicitar orientação
-          </a>
-        </form>
+        @if($ProjectOwner['id'] == $user->id)
+          <p class="already-joined-msg"> Você é o responsável deste projeto!</p>  
+        @elseif(!$hasUserJoined)
+          <form action="/projetos/join/{{ $Projeto->id }}" method="POST">
+            @csrf
+            <a href="/projetos/join/{{ $Projeto->id }}" 
+              class="btn btn-primary" 
+              id="event-submit"
+              onclick="Projeto.preventDefault();
+              this.closest('form').submit();">
+              Solicitar orientação
+            </a>
+          </form>
         @else
           <p class="already-joined-msg"> Voce já está participando deste projeto</p>
         @endif

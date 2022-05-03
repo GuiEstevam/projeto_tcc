@@ -19,6 +19,7 @@
         </thead>
         <tbody>
             @foreach($Projetos as $Projetos)
+            
                 <tr>
                     <td><a href="/projetos/{{ $Projetos->id }}">{{ $Projetos->name}}</a></td>
                     <td>{{count($Projetos->users)}}</td>
@@ -51,6 +52,7 @@
     </thead>
     <tbody>
         @foreach($projetosAsParticipant as $Projetos)
+            @if($Projetos->pivot->situacao == 1)
             <tr>
                 <td><a href="/projetos/{{ $Projetos->id }}">{{ $Projetos->name}}</a></td>
                 <td>{{count($Projetos->users)}}</td>
@@ -65,6 +67,8 @@
                     </form>
                 </td>
                 </tr>
+            @else   
+            @endif            
         @endforeach    
     </tbody>
 </table>
