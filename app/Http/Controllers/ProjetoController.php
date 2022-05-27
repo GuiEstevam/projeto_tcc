@@ -92,6 +92,8 @@ class ProjetoController extends Controller
         $user = auth()->user();
         $Projeto = $user->projetos;
         $projetosAsParticipant = $user->projetosAsParticipant;
+        //trecho de código para pegar o usuário logado e verificar se ele tem projetos
+        // e verificar se usuários tem a situação zero
 
         return view('projetos.dashboard',
         ['Projetos'=> $Projeto, 'projetosAsParticipant' => $projetosAsParticipant]);
@@ -100,10 +102,11 @@ class ProjetoController extends Controller
     public function joinProject($id){
         $user = auth()->user();
 
-        $user->projetosAsParticipant()->attach($id);
-
         $Projeto = Projeto::findOrFail($id);
+        
+        $user->projetosAsParticipant()->attach($id, ['owner_id' =>$Projeto->user_id]);
 
+        //
         return redirect('/dashboard')->with('msg','Sua solicitação foi enviada para o projeto:'. $Projeto->name);
 
     }
@@ -125,17 +128,19 @@ class ProjetoController extends Controller
     }
 
     public function teste_devolucao($id){
-        $ups = auth()->user()->projetos;
-        $situacaos = Projeto::findOrFail($id);
-        // $user_id = auth()->user()->id;
-        // $situacaos = DB::select(' select p.situacao, u.user_id from projeto_user p join users u where user_id = ?',
-        //     [$ups]);
+        $user_id = auth()->user()->id;
+        $situacao = DB::select('select u.name, 
+        case p.situacao
+        when "0" then "Aguardando Aprovacao"
+        when "1" then "Aprovado"
+        end situacao, p.owner_id, p.user_id 
+        from projeto_user p 
+        join users u 
+        on p.user_id = u.id 
+        where owner_id = ?',
+        [$user_id]);
 
         return view('teste',
-        ['Projeto'=> $ups,
-        'situacaos'=> $situacaos]);
-        // $user = auth()->user();
-        // $pivot = DB::select('select * from projeto_user');
-        // return view('teste',['Projeto'=> $pivot, 'user'=>$user]);
+        ['situacao'=> $situacao]);
     }
 }
