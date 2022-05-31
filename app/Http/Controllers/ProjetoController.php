@@ -127,20 +127,64 @@ class ProjetoController extends Controller
         return view('layouts.main',['nomedousuario' => $user]);
     }
 
-    public function teste_devolucao($id){
+    public function participantes($id){
         $user_id = auth()->user()->id;
-        $situacao = DB::select('select u.name, 
+        $pendentes = DB::select('select u.name, 
         case p.situacao
         when "0" then "Aguardando Aprovacao"
+        end situacao, p.owner_id, p.user_id 
+        from projeto_user p 
+        join users u 
+        on p.user_id = u.id 
+        where p.owner_id = ? and p.projeto_id = ? and p.situacao = 0 ',
+        [$user_id, $id]);
+
+        $aprovados = DB::select('select u.name, 
+        case p.situacao
         when "1" then "Aprovado"
         end situacao, p.owner_id, p.user_id 
         from projeto_user p 
         join users u 
         on p.user_id = u.id 
-        where owner_id = ?',
-        [$user_id]);
+        where p.owner_id = ? and p.projeto_id = ? and p.situacao = 1',
+        [$user_id, $id]);
 
-        return view('teste',
-        ['situacao'=> $situacao]);
+        return view('projetos.participantes',
+        ['pendentes'=> $pendentes,
+        'aprovados'=>$aprovados]);
+    }
+
+    public function aceitar($id){
+        $aluno = DB::select('select u.name 
+        from users u 
+        join projeto_user pu 
+        on pu.user_id = u.id 
+        where pu.user_id = ?',[$id]);
+
+        foreach ($aluno as $aluno){
+            $nome = $aluno->name;
+        }
+       
+        DB::update('update projeto_user set situacao = "1" where user_id =?',[$id]);
+
+        return back()->with('msg','O aluno '.$nome.' agora é participante do projeto');
+    }
+
+    public function recusar($id){
+        
+
+        $aluno = DB::select('select u.name 
+        from users u 
+        join projeto_user pu 
+        on pu.user_id = u.id 
+        where pu.user_id = ?',[$id]);
+
+        foreach ($aluno as $aluno){
+            $nome = $aluno->name;
+        }
+       
+        DB::update('delete from projeto_user where user_id = ?',[$id]);
+
+        return back()->with('msg','A partipação do aluno '.$nome.' foi recusada');
     }
 }

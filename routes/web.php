@@ -28,4 +28,8 @@ Route::get('/projetos/join/{id}', [ProjetoController::class,'joinProject'])->mid
 
 Route::delete('/projetos/leave/{id}', [ProjetoController::class,'leaveProject'])->middleware('auth');
 
-Route::get('/teste/{id}',[ProjetoController::class,'teste_devolucao']);
+Route::get('/projetos/participantes/{id}',[ProjetoController::class,'participantes'])->middleware('auth');
+
+Route::get('/projetos/participantes/aceitar/{id}',[ProjetoController::class,'aceitar'])->middleware('auth');
+
+Route::get('/projetos/participantes/recusar/{id}',[ProjetoController::class,'recusar'])->middleware('auth');

@@ -98,6 +98,7 @@ header {
 
 #events-container h2 {
   margin-bottom: 10px;
+  font-weight: 900;
 }
 
 #events-container .subtitle {
@@ -211,6 +212,13 @@ header {
   margin-bottom: 30px;
   margin-top: 30px;
 }
+.dashboard-title-container h1{
+  margin-bottom: 30px;
+  margin-top: 30px;
+  font-weight: 900;
+  
+}
+
 
 .dashboard-events-container th {
   width: 25%;
