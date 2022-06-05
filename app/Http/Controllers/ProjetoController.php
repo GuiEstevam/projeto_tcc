@@ -72,6 +72,7 @@ class ProjetoController extends Controller
 
         $user = auth()->user();
         $hasUserJoined = false;
+        $hasUserApproved = false;
 
         if($user){
             $userProjects = $user->projetosAsParticipant->toArray();
@@ -79,21 +80,22 @@ class ProjetoController extends Controller
             foreach($userProjects as $userProject){
                 if ($userProject['id'] == $id){
                     $hasUserJoined = true;
+                        if ($userProject['pivot']['situacao'] == 1){
+                            $hasUserApproved = true;
+                        }                  
                 }
             }
         }
-
+        
         $ProjectOwner = User::where('id', $Projeto->user_id)->first()->toArray();
 
-        return view('projetos.show',['Projeto'=>$Projeto, 'ProjectOwner' => $ProjectOwner, 'hasUserJoined' => $hasUserJoined, 'user'=> $user]);
+        return view('projetos.show',['hasUserApproved'=> $hasUserApproved, 'Projeto'=>$Projeto, 'ProjectOwner' => $ProjectOwner, 'hasUserJoined' => $hasUserJoined, 'user'=> $user]);
     }
 
     public function dashboard(){
         $user = auth()->user();
         $Projeto = $user->projetos;
         $projetosAsParticipant = $user->projetosAsParticipant;
-        //trecho de código para pegar o usuário logado e verificar se ele tem projetos
-        // e verificar se usuários tem a situação zero
 
         return view('projetos.dashboard',
         ['Projetos'=> $Projeto, 'projetosAsParticipant' => $projetosAsParticipant]);
@@ -106,7 +108,6 @@ class ProjetoController extends Controller
         
         $user->projetosAsParticipant()->attach($id, ['owner_id' =>$Projeto->user_id]);
 
-        //
         return redirect('/dashboard')->with('msg','Sua solicitação foi enviada para o projeto:'. $Projeto->name);
 
     }

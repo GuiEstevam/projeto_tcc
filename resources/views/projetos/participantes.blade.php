@@ -46,6 +46,7 @@
                         <td class = "text-center">{{$aprovados->situacao}}</td>
                         <td class = "text-center">
                             <a href="" class="btn btn-primary">Chat</a>
+                            <a href="/projetos/participantes/recusar/{{ $aprovados->user_id }}" class="btn btn-danger delete-btn">Retirar</a>
                         </td>
                     </tr>
             @endforeach   

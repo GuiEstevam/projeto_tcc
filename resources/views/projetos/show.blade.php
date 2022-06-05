@@ -4,6 +4,9 @@
 
 @section('content')
 
+{{-- @dd($hasUserJoined) --}}
+{{-- @dd($userProjects) --}}
+
 <div class="col-md-10 offset-md-1">
     <div class="row">
       <div id="image-container" class="col-md-6">
@@ -16,7 +19,7 @@
         <p class="event-owner"><ion-icon name="star-outline"></ion-icon> Orientador: {{ $ProjectOwner['name'] }}</p>
         @if($ProjectOwner['id'] == $user->id)
           <p class="already-joined-msg"> Você é o responsável deste projeto!</p>  
-        @elseif(!$hasUserJoined)
+        @elseif(!$hasUserJoined && !$hasUserApproved) 
           <form action="/projetos/join/{{ $Projeto->id }}" method="POST">
             @csrf
             <a href="/projetos/join/{{ $Projeto->id }}" 
@@ -27,8 +30,10 @@
               Solicitar orientação
             </a>
           </form>
-        @else
+        @elseif($hasUserJoined && $hasUserApproved)
           <p class="already-joined-msg"> Voce já está participando deste projeto</p>
+        @else
+        <p class="already-joined-msg"> Voce esta aguardando aprovacao deste projeto</p>
         @endif
       </div>
       <div class="col-md-12" id="description-container">
