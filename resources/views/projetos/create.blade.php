@@ -10,7 +10,7 @@
   <form action="/projetos" method="POST" enctype="multipart/form-data">
    @csrf
    <div class="form-group">
-      <label for="image">Imagem do referente ao projeto:</label>
+      <label for="image">Imagem referente ao projeto:</label>
       <input type="file" id="image" name="image" class="form-control-file">
     </div>
     <div class="form-group">

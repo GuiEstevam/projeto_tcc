@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth;
 
 use App\Models\Projeto;
 use App\Models\User;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class ProjetoController extends Controller
 {
