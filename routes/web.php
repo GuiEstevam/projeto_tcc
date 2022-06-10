@@ -13,23 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\ProjetoController;
+use App\Http\Controllers\TagController;
 
+// Projetos
 Route::get('/', [ProjetoController::class, 'index']);
 Route::get('/projetos/create', [ProjetoController::class, 'create'])->middleware('auth');
 Route::get('/projetos/{id}', [ProjetoController::class, 'show'])->middleware('auth');
 Route::post('/projetos', [ProjetoController::class, 'store'])->middleware('auth');
-Route::get('/projetos/edit/{id}',[ProjetoController::class, 'edit'])->middleware('auth');
+Route::get('/projetos/edit/{id}', [ProjetoController::class, 'edit'])->middleware('auth');
 Route::put('/projetos/update/{id}', [ProjetoController::class, 'update'])->middleware('auth');
 Route::delete('/projetos/{id}', [ProjetoController::class, 'destroy'])->middleware('auth');
+Route::get('/dashboard', [ProjetoController::class, 'dashboard'])->middleware('auth');
+Route::get('/projetos/join/{id}', [ProjetoController::class, 'joinProject'])->middleware('auth');
+Route::delete('/projetos/leave/{id}', [ProjetoController::class, 'leaveProject'])->middleware('auth');
+Route::get('/projetos/participantes/{id}', [ProjetoController::class, 'participantes'])->middleware('auth');
+Route::get('/projetos/participantes/aceitar/{id}', [ProjetoController::class, 'aceitar'])->middleware('auth');
+Route::get('/projetos/participantes/recusar/{id}', [ProjetoController::class, 'recusar'])->middleware('auth');
 
-Route::get('/dashboard', [ProjetoController::class,'dashboard'])->middleware('auth');
-
-Route::get('/projetos/join/{id}', [ProjetoController::class,'joinProject'])->middleware('auth');
-
-Route::delete('/projetos/leave/{id}', [ProjetoController::class,'leaveProject'])->middleware('auth');
-
-Route::get('/projetos/participantes/{id}',[ProjetoController::class,'participantes'])->middleware('auth');
-
-Route::get('/projetos/participantes/aceitar/{id}',[ProjetoController::class,'aceitar'])->middleware('auth');
-
-Route::get('/projetos/participantes/recusar/{id}',[ProjetoController::class,'recusar'])->middleware('auth');
+// Tags
+Route::get('/tags/create', [TagController::class, 'create'])->middleware('auth');
+Route::get('/tags/listagem', [TagController::class, 'festa']);
+Route::post('/tags', [TagController::class, 'store'])->middleware('auth');

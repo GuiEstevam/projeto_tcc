@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddOwnerIdToProjetoUserTable extends Migration
+class CreateCampusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddOwnerIdToProjetoUserTable extends Migration
      */
     public function up()
     {
-        Schema::table('projeto_user', function (Blueprint $table) {
-            $table->integer('owner_id');
+        Schema::create('campus', function (Blueprint $table) {
+            $table->id('id_campus');
+            $table->string('name');
+            $table->boolean('disponibility');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddOwnerIdToProjetoUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('projeto_user', function (Blueprint $table) {
-            $table->integer('owner_id');
-        });
+        Schema::dropIfExists('campuses');
     }
 }

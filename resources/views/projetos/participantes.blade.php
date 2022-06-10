@@ -5,7 +5,8 @@
 @section('content')         
     <div class="col-md-10 offset-md-1 dashboard-title-container">
         <h2>SOLICITAÇÕES</h2>
-    </div>    
+    </div>
+    <div class="col-md-10 offset-md-1 dashboard-events-container">   
         @if(count($pendentes) > 0)
             <table class="table table-hover">
                 <thead>
@@ -30,10 +31,12 @@
             @else
             <p> Não há solicitações pendentes</p>
             @endif  
+        </div>
         </table>
         <div class="col-md-10 offset-md-1 dashboard-title-container">
             <h2>APROVADOS</h2>
-        </div> 
+        </div>
+        <div class="col-md-10 offset-md-1 dashboard-events-container">
         <table class="table">
             @if(count($aprovados) > 0)
             <thead>
@@ -56,11 +59,9 @@
                 </tbody>
             @endforeach   
             @else
-                <tbody>
                 <p>Não há alunos aprovados</p>
-            @endif      
-                </tbody>
-
+            @endif  
             </table>
+        </div>
         
 @endsection
