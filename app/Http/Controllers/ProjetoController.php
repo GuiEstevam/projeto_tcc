@@ -7,24 +7,29 @@ use Illuminate\Foundation\Auth;
 
 use App\Models\Projeto;
 use App\Models\User;
+use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
 
 class ProjetoController extends Controller
 {
-    
-    public function index(){
+
+    public function index()
+    {
         $Projeto = Projeto::all();
-        return view('welcome', ['Projeto' => $Projeto ]);
+        return view('welcome', ['Projeto' => $Projeto]);
     }
 
-    public function create(){
-        return view('projetos.create');
+    public function create()
+    {
+        $Tag = Tag::all();
+        return view('projetos.create', ['Tag' => $Tag]);
     }
 
-    public function store(Request $request){
-        
+    public function store(Request $request)
+    {
+
         $Projeto = new Projeto;
-        
+
         $Projeto->name = $request->name;
         $Projeto->campus = $request->campus;
         $Projeto->disponibility = $request->disponibility;
@@ -32,7 +37,7 @@ class ProjetoController extends Controller
 
         // Image Upload
 
-        if($request->hasFile('image') && $request->file('image')->isValid()){
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $requestImage = $request->image;
             $extension = $requestImage->extension();
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
@@ -45,92 +50,102 @@ class ProjetoController extends Controller
 
         return redirect('/')->with('msg', 'Projeto criado com sucesso!');
     }
-    public function destroy($id){
+    public function destroy($id)
+    {
 
         Projeto::findOrFail($id)->delete();
 
         return redirect('/')->with('msg', 'Evento excluído com sucesso!');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $user = auth()->user();
         $Projeto = Projeto::findOrFail($id);
 
-        if($user->id != $Projeto->user_id){
-            return redirect ('/dashboard');
+        if ($user->id != $Projeto->user_id) {
+            return redirect('/dashboard');
         }
-        return view('projetos.edit',['Projeto'=> $Projeto]);
+        return view('projetos.edit', ['Projeto' => $Projeto]);
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
 
         Projeto::findOrFail($request->id)->update($request->all());
         return redirect('/')->with('msg', 'Evento editado com sucesso!');
     }
-    public function show($id){
+    public function show($id)
+    {
         $Projeto = Projeto::findOrFail($id);
 
         $user = auth()->user();
         $hasUserJoined = false;
         $hasUserApproved = false;
 
-        if($user){
+        if ($user) {
             $userProjects = $user->projetosAsParticipant->toArray();
 
-            foreach($userProjects as $userProject){
-                if ($userProject['id'] == $id){
+            foreach ($userProjects as $userProject) {
+                if ($userProject['id'] == $id) {
                     $hasUserJoined = true;
-                        if ($userProject['pivot']['situacao'] == 1){
-                            $hasUserApproved = true;
-                        }                  
+                    if ($userProject['pivot']['situacao'] == 1) {
+                        $hasUserApproved = true;
+                    }
                 }
             }
         }
-        
+
         $ProjectOwner = User::where('id', $Projeto->user_id)->first()->toArray();
 
-        return view('projetos.show',['hasUserApproved'=> $hasUserApproved, 'Projeto'=>$Projeto, 'ProjectOwner' => $ProjectOwner, 'hasUserJoined' => $hasUserJoined, 'user'=> $user]);
+        return view('projetos.show', ['hasUserApproved' => $hasUserApproved, 'Projeto' => $Projeto, 'ProjectOwner' => $ProjectOwner, 'hasUserJoined' => $hasUserJoined, 'user' => $user]);
     }
 
-    public function dashboard(){
+    public function dashboard()
+    {
         $user = auth()->user();
         $Projeto = $user->projetos;
         $projetosAsParticipant = $user->projetosAsParticipant;
 
-        return view('projetos.dashboard',
-        ['Projetos'=> $Projeto, 'projetosAsParticipant' => $projetosAsParticipant]);
+        return view(
+            'projetos.dashboard',
+            ['Projetos' => $Projeto, 'projetosAsParticipant' => $projetosAsParticipant]
+        );
     }
 
-    public function joinProject($id){
+    public function joinProject($id)
+    {
         $user = auth()->user();
 
         $Projeto = Projeto::findOrFail($id);
-        
-        $user->projetosAsParticipant()->attach($id, ['owner_id' =>$Projeto->user_id]);
 
-        return redirect('/dashboard')->with('msg','Sua solicitação foi enviada para o projeto:'. $Projeto->name);
+        $user->projetosAsParticipant()->attach($id, ['owner_id' => $Projeto->user_id]);
 
+        return redirect('/dashboard')->with('msg', 'Sua solicitação foi enviada para o projeto:' . $Projeto->name);
     }
 
-    public function leaveProject($id){
+    public function leaveProject($id)
+    {
         $user = auth()->user();
 
         $user->projetosAsParticipant()->detach($id);
 
         $Projeto = Projeto::findOrFail($id);
 
-        return redirect('/dashboard')->with('msg','Voce não faz mais parte do projeto:'. $Projeto->name);
-
+        return redirect('/dashboard')->with('msg', 'Voce não faz mais parte do projeto:' . $Projeto->name);
     }
 
-    public function main_layout(){
+    public function main_layout()
+    {
         $user = auth()->user();
-        return view('layouts.main',['nomedousuario' => $user]);
+        return view('layouts.main', ['nomedousuario' => $user]);
     }
 
-    public function participantes($id){
+    public function participantes($id)
+    {
         $user_id = auth()->user()->id;
-        $pendentes = DB::select('select u.name, 
+        $pendentes = DB::select(
+            'select u.name, 
         case p.situacao
         when "0" then "Aguardando Aprovacao"
         end situacao, p.owner_id, p.user_id 
@@ -138,9 +153,11 @@ class ProjetoController extends Controller
         join users u 
         on p.user_id = u.id 
         where p.owner_id = ? and p.projeto_id = ? and p.situacao = 0 ',
-        [$user_id, $id]);
+            [$user_id, $id]
+        );
 
-        $aprovados = DB::select('select u.name, 
+        $aprovados = DB::select(
+            'select u.name, 
         case p.situacao
         when "1" then "Aprovado"
         end situacao, p.owner_id, p.user_id 
@@ -148,44 +165,51 @@ class ProjetoController extends Controller
         join users u 
         on p.user_id = u.id 
         where p.owner_id = ? and p.projeto_id = ? and p.situacao = 1',
-        [$user_id, $id]);
+            [$user_id, $id]
+        );
 
-        return view('projetos.participantes',
-        ['pendentes'=> $pendentes,
-        'aprovados'=>$aprovados]);
+        return view(
+            'projetos.participantes',
+            [
+                'pendentes' => $pendentes,
+                'aprovados' => $aprovados
+            ]
+        );
     }
 
-    public function aceitar($id){
+    public function aceitar($id)
+    {
         $aluno = DB::select('select u.name 
         from users u 
         join projeto_user pu 
         on pu.user_id = u.id 
-        where pu.user_id = ?',[$id]);
+        where pu.user_id = ?', [$id]);
 
-        foreach ($aluno as $aluno){
+        foreach ($aluno as $aluno) {
             $nome = $aluno->name;
         }
-       
-        DB::update('update projeto_user set situacao = "1" where user_id =?',[$id]);
 
-        return back()->with('msg','O aluno '.$nome.' agora é participante do projeto');
+        DB::update('update projeto_user set situacao = "1" where user_id =?', [$id]);
+
+        return back()->with('msg', 'O aluno ' . $nome . ' agora é participante do projeto');
     }
 
-    public function recusar($id){
-        
+    public function recusar($id)
+    {
+
 
         $aluno = DB::select('select u.name 
         from users u 
         join projeto_user pu 
         on pu.user_id = u.id 
-        where pu.user_id = ?',[$id]);
+        where pu.user_id = ?', [$id]);
 
-        foreach ($aluno as $aluno){
+        foreach ($aluno as $aluno) {
             $nome = $aluno->name;
         }
-       
-        DB::update('delete from projeto_user where user_id = ?',[$id]);
 
-        return back()->with('msg','A partipação do aluno '.$nome.' foi recusada');
+        DB::update('delete from projeto_user where user_id = ?', [$id]);
+
+        return back()->with('msg', 'A partipação do aluno ' . $nome . ' foi recusada');
     }
 }

@@ -16,7 +16,7 @@ class TagController extends Controller
 
     public function create()
     {
-        return view('tags.create');
+        return view('tags.create_tag');
     }
     public function store(Request $request)
     {

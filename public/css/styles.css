@@ -213,8 +213,10 @@ header {
   margin-top: 30px;
 }
 .dashboard-title-container h1{
-  margin-bottom: 30px;
-  margin-top: 30px;
+  font-weight: 900;
+  
+}
+.dashboard-title-container h2{
   font-weight: 900;
   
 }
