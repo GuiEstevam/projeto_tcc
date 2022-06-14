@@ -23,7 +23,7 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Número</th>
+                <th scope="col" class = "text-center">Número</th>
                 <th scope="col" class = "text-center">Nome</th>
                 <th scope="col">Ações</th>
             </tr>
@@ -31,7 +31,7 @@
         <tbody>
             @foreach($Tag as $Tag)
                 <tr>
-                    <td class = "text-center">{{ $Tag->id_tag}}</td>
+                    <td class = "text-center">{{ $Tag->id}}</td>
                     <td class = "text-center">{{ $Tag->name}}</td>
                     <td>
                         <a href="/tags/edit/{{$Tag->id}}" class="btn btn-primary">Editar</a> 
@@ -46,7 +46,7 @@
         </tbody>
     </table>
     @else
-    <p>Você ainda não tem projetos, <a href="/projetos/create">criar projeto</a></p>
+    <p>Você ainda não tem tags, <a href="/tags/create">criar tag</a></p>
     @endif
 </div>
 

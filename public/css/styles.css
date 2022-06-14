@@ -221,9 +221,22 @@ header {
   
 }
 
-
 .dashboard-events-container th {
   width: 25%;
+}
+
+.bootstrap-select .btn {
+  border-top: none;
+  border-bottom: none;
+  border-right: none;
+  font-weight: 200;
+  padding: 12px 12px 22px 12px;
+  font-size: 16px;
+  margin-bottom: 10px;
+
+}
+.bootstrap-select .dropdown-menu {
+  margin: 2px 0 0;
 }
 
 .dashboard-events-container form {

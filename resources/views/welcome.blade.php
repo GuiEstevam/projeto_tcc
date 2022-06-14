@@ -20,7 +20,9 @@
             <img src="/img/projects/{{ $Projeto->image }}" alt="{{ $Projeto->name }}">
             <div class="card-body">
                 <h5 class="card-title">{{ $Projeto->name }}</h5>
-                <p class="card-participants">Tags:</p>
+                {{-- @foreach ($tags as $tags) --}}
+                    <p class="card-participants">Tags:@dd($tags)</p>
+                {{-- @endforeach --}}
                 <a href="/projetos/{{$Projeto -> id}}" class="btn btn-primary"> Saber mais </a>
                     </form>
             </div>

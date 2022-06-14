@@ -13,8 +13,8 @@ class CreateTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('tag', function (Blueprint $table) {
-            $table->id('id_tag');
+        Schema::create('tags', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
             $table->boolean('disponibility');
             $table->timestamps();
@@ -28,6 +28,6 @@ class CreateTagTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag');
+        Schema::dropIfExists('tags');
     }
 }

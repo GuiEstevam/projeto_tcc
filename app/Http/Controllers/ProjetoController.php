@@ -15,8 +15,22 @@ class ProjetoController extends Controller
 
     public function index()
     {
+        $Tag = Tag::all();
+        $tag = $Tag->projetos();
         $Projeto = Projeto::all();
-        return view('welcome', ['Projeto' => $Projeto]);
+
+        // foreach ($Projeto as $Projetos) {
+        //     $tags = DB::select("
+        //     select t.name
+        //     from projeto_tag pt
+        //     join projetos p on pt.projeto_id = p.id
+        //     join tags t on t.id = pt.tag_id = ?", [$Projetos->id]);
+        //     foreach ($tags as $tags) {
+        //         $astag = $tags->name;
+        //     }
+        // $sabor = $Projeto->id;
+        // };
+        return view('welcome', ['Projeto' => $Projeto, 'tags' => $tag]);
     }
 
     public function create()
@@ -32,8 +46,11 @@ class ProjetoController extends Controller
 
         $Projeto->name = $request->name;
         $Projeto->campus = $request->campus;
-        $Projeto->disponibility = $request->disponibility;
         $Projeto->description = $request->description;
+
+        $tags = $request->tag;
+
+
 
         // Image Upload
 
@@ -47,6 +64,24 @@ class ProjetoController extends Controller
         $user = auth()->user();
         $Projeto->user_id = $user->id;
         $Projeto->save();
+        foreach ($tags as $tags) {
+            DB::insert('insert into projeto_tag (tag_id, projeto_id) values (?,?)', [
+                $tags, $Projeto->id
+            ]);
+        }
+
+        $codigo_tag = DB::select(
+            'select id_projeto_tag from projeto_tag where projeto_id = ?',
+            [$Projeto->id]
+        );
+        foreach ($codigo_tag as $codigo_tag) {
+            $att_tag = $codigo_tag->id_projeto_tag;
+        }
+
+        \DB::update(
+            'update projetos set tag_id = ? where id = ? ',
+            [$att_tag, $Projeto->id]
+        );
 
         return redirect('/')->with('msg', 'Projeto criado com sucesso!');
     }
@@ -145,25 +180,25 @@ class ProjetoController extends Controller
     {
         $user_id = auth()->user()->id;
         $pendentes = DB::select(
-            'select u.name, 
+            'select u.name,
         case p.situacao
         when "0" then "Aguardando Aprovacao"
-        end situacao, p.owner_id, p.user_id 
-        from projeto_user p 
-        join users u 
-        on p.user_id = u.id 
+        end situacao, p.owner_id, p.user_id
+        from projeto_user p
+        join users u
+        on p.user_id = u.id
         where p.owner_id = ? and p.projeto_id = ? and p.situacao = 0 ',
             [$user_id, $id]
         );
 
         $aprovados = DB::select(
-            'select u.name, 
+            'select u.name,
         case p.situacao
         when "1" then "Aprovado"
-        end situacao, p.owner_id, p.user_id 
-        from projeto_user p 
-        join users u 
-        on p.user_id = u.id 
+        end situacao, p.owner_id, p.user_id
+        from projeto_user p
+        join users u
+        on p.user_id = u.id
         where p.owner_id = ? and p.projeto_id = ? and p.situacao = 1',
             [$user_id, $id]
         );
@@ -179,10 +214,10 @@ class ProjetoController extends Controller
 
     public function aceitar($id)
     {
-        $aluno = DB::select('select u.name 
-        from users u 
-        join projeto_user pu 
-        on pu.user_id = u.id 
+        $aluno = DB::select('select u.name
+        from users u
+        join projeto_user pu
+        on pu.user_id = u.id
         where pu.user_id = ?', [$id]);
 
         foreach ($aluno as $aluno) {
@@ -198,10 +233,10 @@ class ProjetoController extends Controller
     {
 
 
-        $aluno = DB::select('select u.name 
-        from users u 
-        join projeto_user pu 
-        on pu.user_id = u.id 
+        $aluno = DB::select('select u.name
+        from users u
+        join projeto_user pu
+        on pu.user_id = u.id
         where pu.user_id = ?', [$id]);
 
         foreach ($aluno as $aluno) {

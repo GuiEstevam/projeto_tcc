@@ -60,15 +60,18 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function getCodigoUser() {
+    public function getCodigoUser()
+    {
         return $this->id;
     }
 
-    public function projetos(){
+    public function projetos()
+    {
         return $this->hasMany('App\Models\Projeto');
-    } 
-    
-    public function projetosAsParticipant(){
+    }
+
+    public function projetosAsParticipant()
+    {
         return $this->belongsToMany('App\Models\Projeto')->withPivot('situacao');
     }
 }

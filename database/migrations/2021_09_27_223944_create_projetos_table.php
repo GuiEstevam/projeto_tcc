@@ -17,11 +17,11 @@ class CreateProjetosTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->text('campus');    
+            $table->text('campus');
             $table->text('description');
             $table->string('image');
-            $table->boolean('disponibility');
-            $table->int('situation');
+            $table->boolean('disponibility')->default(0);
+            $table->integer('situation')->default(0);
             $table->integer('user_id')->constrained();
         });
     }

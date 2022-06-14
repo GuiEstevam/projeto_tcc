@@ -15,13 +15,19 @@ class Projeto extends Model
 
     protected $dates = ['date'];
 
-    protected $guarded = [] ;
+    protected $guarded = [];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo('App\Models\User')->withPivot('situacao');
     }
 
-    public function users(){
+    public function users()
+    {
         return $this->belongsToMany('App\Models\User');
+    }
+    public function tagsProjects()
+    {
+        return $this->belongstoMany('App\Models\Tag');
     }
 }
