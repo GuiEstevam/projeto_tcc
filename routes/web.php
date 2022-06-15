@@ -18,7 +18,7 @@ use App\Http\Controllers\TagController;
 // Projetos
 Route::get('/', [ProjetoController::class, 'index']);
 Route::get('/projetos/create', [ProjetoController::class, 'create'])->middleware('auth');
-Route::get('/projetos/{id}', [ProjetoController::class, 'show'])->middleware('auth');
+Route::get('/projetos/{id}', [ProjetoController::class, 'show']);
 Route::post('/projetos', [ProjetoController::class, 'store'])->middleware('auth');
 Route::get('/projetos/edit/{id}', [ProjetoController::class, 'edit'])->middleware('auth');
 Route::put('/projetos/update/{id}', [ProjetoController::class, 'update'])->middleware('auth');

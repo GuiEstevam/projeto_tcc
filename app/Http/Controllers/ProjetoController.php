@@ -15,22 +15,8 @@ class ProjetoController extends Controller
 
     public function index()
     {
-        $Tag = Tag::all();
-        $tag = $Tag->projetos();
         $Projeto = Projeto::all();
-
-        // foreach ($Projeto as $Projetos) {
-        //     $tags = DB::select("
-        //     select t.name
-        //     from projeto_tag pt
-        //     join projetos p on pt.projeto_id = p.id
-        //     join tags t on t.id = pt.tag_id = ?", [$Projetos->id]);
-        //     foreach ($tags as $tags) {
-        //         $astag = $tags->name;
-        //     }
-        // $sabor = $Projeto->id;
-        // };
-        return view('welcome', ['Projeto' => $Projeto, 'tags' => $tag]);
+        return view('welcome', ['Projeto' => $Projeto]);
     }
 
     public function create()
@@ -41,7 +27,6 @@ class ProjetoController extends Controller
 
     public function store(Request $request)
     {
-
         $Projeto = new Projeto;
 
         $Projeto->name = $request->name;
@@ -49,10 +34,6 @@ class ProjetoController extends Controller
         $Projeto->description = $request->description;
 
         $tags = $request->tag;
-
-
-
-        // Image Upload
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $requestImage = $request->image;
@@ -64,44 +45,33 @@ class ProjetoController extends Controller
         $user = auth()->user();
         $Projeto->user_id = $user->id;
         $Projeto->save();
-        foreach ($tags as $tags) {
-            DB::insert('insert into projeto_tag (tag_id, projeto_id) values (?,?)', [
-                $tags, $Projeto->id
-            ]);
+        foreach($tags as $tags){
+            $Projeto->tags()->attach($tags,['projeto_id'=> $Projeto->id]);
         }
-
-        $codigo_tag = DB::select(
-            'select id_projeto_tag from projeto_tag where projeto_id = ?',
-            [$Projeto->id]
-        );
-        foreach ($codigo_tag as $codigo_tag) {
-            $att_tag = $codigo_tag->id_projeto_tag;
-        }
-
-        \DB::update(
-            'update projetos set tag_id = ? where id = ? ',
-            [$att_tag, $Projeto->id]
-        );
-
         return redirect('/')->with('msg', 'Projeto criado com sucesso!');
     }
     public function destroy($id)
     {
+        $Projeto = Projeto::findOrFail($id);
+        
+        $Projeto->tags()->detach();
 
-        Projeto::findOrFail($id)->delete();
+        $Projeto->delete();
 
-        return redirect('/')->with('msg', 'Evento excluído com sucesso!');
+        return redirect('/')->with('msg', 'Projeto excluído com sucesso!');
     }
 
     public function edit($id)
     {
+        // $Tags = Tags::;
         $user = auth()->user();
         $Projeto = Projeto::findOrFail($id);
+        // $Tags = $Projeto->tags()->where('projeto_id', $id)->get();
 
         if ($user->id != $Projeto->user_id) {
             return redirect('/dashboard');
         }
-        return view('projetos.edit', ['Projeto' => $Projeto]);
+        return view('projetos.edit', ['Projeto' => $Projeto, 'Tag'=> $Tags]);
     }
 
     public function update(Request $request)
@@ -130,10 +100,11 @@ class ProjetoController extends Controller
                 }
             }
         }
+        $Tags = $Projeto->tags()->where('projeto_id', $Projeto->id)->get();
 
         $ProjectOwner = User::where('id', $Projeto->user_id)->first()->toArray();
 
-        return view('projetos.show', ['hasUserApproved' => $hasUserApproved, 'Projeto' => $Projeto, 'ProjectOwner' => $ProjectOwner, 'hasUserJoined' => $hasUserJoined, 'user' => $user]);
+        return view('projetos.show', ['Tags'=> $Tags,'hasUserApproved' => $hasUserApproved, 'Projeto' => $Projeto, 'ProjectOwner' => $ProjectOwner, 'hasUserJoined' => $hasUserJoined, 'user' => $user]);
     }
 
     public function dashboard()

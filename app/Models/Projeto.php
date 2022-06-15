@@ -9,10 +9,6 @@ class Projeto extends Model
 {
     use HasFactory;
 
-    protected $casts = [
-        'items' => 'array'
-    ];
-
     protected $dates = ['date'];
 
     protected $guarded = [];
@@ -26,7 +22,8 @@ class Projeto extends Model
     {
         return $this->belongsToMany('App\Models\User');
     }
-    public function tagsProjects()
+
+    public function tags()
     {
         return $this->belongstoMany('App\Models\Tag');
     }

@@ -1,4 +1,3 @@
-
 @extends('layouts.main')
 
 @section('title', 'Projetos')
@@ -11,7 +10,7 @@
         <input type="text" id="search" name="search" class="form-control" placeholder="Procurar...">
     </form>
 </div>
-<div id="events-container" class="col-md-12">
+<div id="events-container" class="col-12">
     <h2>PROJETOS DISPONÍVEIS</h2>
     <p class="subtitle">Veja os projetos que estão disponíveis</p>
     <div id="cards-container" class="row">
@@ -20,9 +19,6 @@
             <img src="/img/projects/{{ $Projeto->image }}" alt="{{ $Projeto->name }}">
             <div class="card-body">
                 <h5 class="card-title">{{ $Projeto->name }}</h5>
-                {{-- @foreach ($tags as $tags) --}}
-                    <p class="card-participants">Tags:@dd($tags)</p>
-                {{-- @endforeach --}}
                 <a href="/projetos/{{$Projeto -> id}}" class="btn btn-primary"> Saber mais </a>
                     </form>
             </div>

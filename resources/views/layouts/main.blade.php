@@ -18,7 +18,7 @@
     </head>
     <body>
       <header>
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand-md navbar-light">
           <div class="collapse navbar-collapse" id="navbar">
             <a href="/" class="navbar-brand">
               <img src="/img/logo.png" alt="Projeto_TCC">
@@ -77,7 +77,7 @@
           </div>
         </main>
       <footer>
-        <p>Projeto Orientador &copy; 2021</p>
+        <p>Projeto Orientador &copy; 2022</p>
       </footer>
       <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     </body>

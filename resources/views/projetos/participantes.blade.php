@@ -16,8 +16,8 @@
                         <th scope="col" class = "text-center">Ações</span></th>
                     </tr>
                 </thead>  
-            <tbody>
                 @foreach($pendentes as $pendentes)
+                <tbody>
                     <tr>
                         <td class = "text-center">{{$pendentes->name}}</td>
                         <td class = "text-center">{{$pendentes->situacao}}</td>
@@ -27,18 +27,18 @@
                         </td>
                     </tr>
                 @endforeach  
-            </tbody>
-            @else
-            <p> Não há solicitações pendentes</p>
+                </tbody>
+                @else
+            <p>Não há solicitações pendentes</p>
             @endif  
-        </div>
         </table>
+        </div>
         <div class="col-md-10 offset-md-1 dashboard-title-container">
             <h2>APROVADOS</h2>
         </div>
         <div class="col-md-10 offset-md-1 dashboard-events-container">
-        <table class="table">
             @if(count($aprovados) > 0)
+            <table class="table">
             <thead>
                 <tr>
                     <th scope="col" class = "text-center">Nome</th>

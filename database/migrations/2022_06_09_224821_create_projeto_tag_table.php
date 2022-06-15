@@ -14,10 +14,9 @@ class CreateProjetoTagTable extends Migration
     public function up()
     {
         Schema::create('projeto_tag', function (Blueprint $table) {
-            $table->id('id_projeto_tag');
             $table->foreignId('tag_id')->constrained();
             $table->foreignId('projeto_id')->constrained();
-
+            $table->id('id_projeto_tag');
             $table->timestamps();
         });
     }

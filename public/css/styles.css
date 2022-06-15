@@ -52,22 +52,22 @@ header {
 }
 /* navbar */
 #navbar img {
-  width: 40px;
+  width: 46px;
 }
 
 #navbar {
   justify-content: space-between;
   background-color: #FFF;
-  padding: 5px 0;
+  padding: 3px 0;
 }
 
 #navbar a {
-  font-size: 14px;
+  font-size: 16px;
   color: #757575;
 }
 
 #navbar a:hover {
-  color: #F2A340;
+  color: #A5D77F;
 }
 
 /* Search Container */
@@ -91,14 +91,13 @@ header {
   margin: 0 auto;
 }
 
-/* Events list */
+/* Projects list */
 #events-container {
   padding: 50px;
 }
 
 #events-container h2 {
   margin-bottom: 10px;
-  font-weight: 900;
 }
 
 #events-container .subtitle {
@@ -115,12 +114,11 @@ header {
   max-width: 25%;
   border-radius: 10px;
   padding: 0;
-  margin: .5%;
+  margin: 5px;
 }
 
 #events-container img {
   height: 150px;
-  width: 100%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
@@ -157,7 +155,7 @@ header {
   font-size: 12px;
 }
 
-/* Event page */
+/* Project page */
 #image-container,
 #info-container {
   margin-top: 30px;
@@ -168,13 +166,13 @@ header {
 }
 
 #info-container h1 {
-  font-size: 36px;
+  font-size: 34px;
   font-weight: 900;
 }
 
 #info-container p {
   margin: 0;
-  font-size: 14px;
+  font-size: 17px;
   display: flex;
 }
 
@@ -194,16 +192,8 @@ header {
   margin: 20px 0;
 }
 
-#items-list {
-  list-style: none;
-  padding-left: 0;
-}
-
-#items-list li {
-  display: flex;
-}
-
 #description-container {
+  font-size: 20px;
   margin-top: 30px;
 }
 

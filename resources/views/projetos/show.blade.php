@@ -4,19 +4,23 @@
 
 @section('content')
 
-{{-- @dd($hasUserJoined) --}}
-{{-- @dd($userProjects) --}}
+{{-- @dd($Tags) --}}
 
 <div class="col-md-10 offset-md-1">
     <div class="row">
-      <div id="image-container" class="col-md-6">
+      <div id="image-container" class="col-md-4">
         <img src="/img/projects/{{ $Projeto->image }}" class="img-fluid" alt="{{ $Projeto->name }}">
       </div>
-      <div id="info-container" class="col-md-6">
+      <div id="info-container" class="col-md-16">
         <h1>{{ $Projeto->name }}</h1>
         <p class="event-city"><ion-icon name="location-outline"></ion-icon> {{ $Projeto->campus }}</p>
         <p class="events-participants"><ion-icon name="people-outline"></ion-icon> {{count($Projeto->users)}}  Alunos</p>
         <p class="event-owner"><ion-icon name="star-outline"></ion-icon> Orientador: {{ $ProjectOwner['name'] }}</p>
+        <p class="event-tags"><ion-icon name="grid-outline"></ion-icon>
+          @foreach ($Tags as $Tags)
+            {{$Tags->name}}.
+          @endforeach
+        </p>
         @if($ProjectOwner['id'] == $user->id)
           <p class="already-joined-msg"> Você é o responsável deste projeto!</p>  
         @elseif(!$hasUserJoined && !$hasUserApproved) 
