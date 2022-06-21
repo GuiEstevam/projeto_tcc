@@ -23,12 +23,12 @@
                         <td class = "text-center"><a href="/projetos/{{ $Projetos->id }}">{{ $Projetos->name}}</a></td>
                         <td class = "text-center">{{count($Projetos->users)}}</td>
                         <td>
-                            <a href="/projetos/participantes/{{$Projetos->id}}" class="btn btn-primary">Partipantes</a>
-                            <a href="/projetos/edit/{{$Projetos->id}}" class="btn btn-primary">Editar</a> 
+                            <a href="/projetos/participantes/{{$Projetos->id}}" class="btn btn-primary mt-2 ">Partipantes</a>
+                            <a href="/projetos/edit/{{$Projetos->id}}" class="btn btn-primary mt-2 ml-1">Editar</a> 
                             <form action="/projetos/{{$Projetos->id}}" method ="POST">
                                 @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger delete-btn"><ion-icon name="trash-outline"></ion-icon> Deletar</button>
+                                    <button type="submit" class="btn btn-danger delete-btn mt-2"><ion-icon name="trash-outline"></ion-icon> Deletar</button>
                             </form>
                         </td>
                     </tr>

@@ -22,17 +22,17 @@
     </div>
     <div class="form-group">
       <label for="title">Campus</label>
-      <input type="text" class="form-control" id="campus" name="campus" placeholder="Seu campus" value= "{{$Projeto->campus}}">
+      <input type="text" class="form-control" id="campus" name="campus" placeholder="Campus onde será realizado" value= "{{$Projeto->campus}}">
     </div>
     <div class="form-group">
-      <label for="title">Descreva suas habilidades:</label>
-      <textarea name="description" id="description" class="form-control" placeholder="Suas habilidades"> {{$Projeto->description}} </textarea>
+      <label for="title">Descreva o seu projeto:</label>
+      <textarea name="description" id="description" class="form-control" placeholder="Descrição do projeto"> {{$Projeto->description}} </textarea>
     </div>
     <div class="form-group">
       <label for="title">Tags:</label>
-        <select class="selectpicker col-12" multiple data-live-search="true" title="Selecione as TAGS" name="tag[]">
-          @foreach($Tag as $Tag)
-            <option value="{{$Tag->id}}">{{$Tag->name}}</option>
+        <select class="selectpicker col-12" multiple data-live-search="true" title="Selecione as TAGS" name="tags[]">
+          @foreach($Tags as $Tags)
+            <option value="{{$Tags->id}}">{{$Tags->name}}</option>
           @endforeach
       </select>
     </div>

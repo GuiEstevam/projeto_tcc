@@ -27,4 +27,9 @@ class Projeto extends Model
     {
         return $this->belongstoMany('App\Models\Tag');
     }
+    
+    public function campus()
+    {
+        return $this->belongstoMany('App\Models\Campus');
+    }
 }

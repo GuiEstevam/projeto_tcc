@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 use App\Http\Controllers\ProjetoController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\CampusController;
 
 // Projetos
 Route::get('/', [ProjetoController::class, 'index']);
@@ -32,5 +33,12 @@ Route::get('/projetos/participantes/recusar/{id}', [ProjetoController::class, 'r
 
 // Tags
 Route::get('/tags/create', [TagController::class, 'create'])->middleware('auth');
-Route::get('/tags/listagem', [TagController::class, 'festa']);
+Route::get('/tags/listagem', [TagController::class, 'listagem']);
 Route::post('/tags', [TagController::class, 'store'])->middleware('auth');
+Route::delete('/tags/{id}', [TagController::class, 'destroy'])->middleware('auth');
+
+// Campus
+Route::get('/campus/listagem', [CampusController::class, 'listagem'])->middleware('auth');
+Route::get('/campus/create', [CampusController::class, 'create'])->middleware('auth');
+Route::post('/campus', [CampusController::class, 'store'])->middleware('auth');
+Route::delete('/campus/{id}', [CampusController::class, 'destroy'])->middleware('auth');

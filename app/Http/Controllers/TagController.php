@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-    public function festa()
+    public function listagem()
     {
         $Tag = Tag::all();
         return view('tags.listagem', ['Tag' => $Tag]);
@@ -26,6 +26,15 @@ class TagController extends Controller
         $Tag->disponibility = $request->disponibility;
 
         $Tag->save();
-        return redirect('/tags/listagem')->with('msg', 'Tag criada com sucesso!');
+        return redirect('/tags/listagem')->with('msg', 'Tag criado com sucesso!');
+    }
+
+    public function destroy($id)
+    {
+        $Tag = Tag::findOrFail($id);
+
+        $Tag->delete();
+
+        return redirect('/tags/listagem')->with('msg', 'Tag excluído com sucesso!');
     }
 }

@@ -36,7 +36,12 @@
               <li class="nav-item">
                 <a href="/" class="nav-link">Conversas</a>
               </li>
-
+              <li class="nav-item">
+                <a href="/tags/listagem" class="nav-link">Tags</a>
+              </li>
+              <li class="nav-item">
+                <a href="/campus/listagem" class="nav-link">Campus</a>
+              </li>
                 @guest
                   <li class="nav-item">
                     <a href="/register" class="nav-link">Cadastrar</a>

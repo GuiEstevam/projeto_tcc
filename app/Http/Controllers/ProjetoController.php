@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth;
 use App\Models\Projeto;
 use App\Models\User;
 use App\Models\Tag;
+use App\Models\Campus;
 use Illuminate\Support\Facades\DB;
 
 class ProjetoController extends Controller
@@ -22,7 +23,8 @@ class ProjetoController extends Controller
     public function create()
     {
         $Tag = Tag::all();
-        return view('projetos.create', ['Tag' => $Tag]);
+        $Campus = Campus::all();
+        return view('projetos.create', ['Tag' => $Tag, 'Campus'=>$Campus]);
     }
 
     public function store(Request $request)
@@ -33,7 +35,8 @@ class ProjetoController extends Controller
         $Projeto->campus = $request->campus;
         $Projeto->description = $request->description;
 
-        $tags = $request->tag;
+        $tags = $request->tags;
+        $campus = $request->campus;
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $requestImage = $request->image;
@@ -42,9 +45,13 @@ class ProjetoController extends Controller
             $requestImage->move(public_path('img/projects'), $imageName);
             $Projeto->image = $imageName;
         }
+
         $user = auth()->user();
         $Projeto->user_id = $user->id;
         $Projeto->save();
+
+        $Projeto->campus()->attach($campus,['projeto_id'=> $Projeto->id]);
+
         foreach($tags as $tags){
             $Projeto->tags()->attach($tags,['projeto_id'=> $Projeto->id]);
         }
@@ -55,6 +62,7 @@ class ProjetoController extends Controller
         $Projeto = Projeto::findOrFail($id);
         
         $Projeto->tags()->detach();
+        $Projeto->campus()->detach();
 
         $Projeto->delete();
 
@@ -63,22 +71,38 @@ class ProjetoController extends Controller
 
     public function edit($id)
     {
-        // $Tags = Tags::;
+        $Tags = Tag::all();
         $user = auth()->user();
         $Projeto = Projeto::findOrFail($id);
-        // $Tags = $Projeto->tags()->where('projeto_id', $id)->get();
+        $SelectedTags = $Projeto->tags()->where('projeto_id', $id)->get();
 
         if ($user->id != $Projeto->user_id) {
             return redirect('/dashboard');
         }
-        return view('projetos.edit', ['Projeto' => $Projeto, 'Tag'=> $Tags]);
+        return view('projetos.edit', ['Projeto' => $Projeto, 'SelectedTags'=> $SelectedTags, 'Tags'=> $Tags]);
     }
 
     public function update(Request $request)
     {
+        $Projeto = Projeto::findOrFail($request->id);
 
-        Projeto::findOrFail($request->id)->update($request->all());
-        return redirect('/')->with('msg', 'Evento editado com sucesso!');
+        $Projeto->update([
+            'name' => $request->name,
+            'description'=>$request->description,
+    ]);
+        $campus = $request->campus;
+
+        $Projeto->campus()->detach();
+
+        $Projeto->campus()->attach($campus,['projeto_id'=> $Projeto->id]);
+
+        $tags = $request->tags;
+        $Projeto->tags()->detach();
+
+    foreach($tags as $tags){
+        $Projeto->tags()->attach($tags,['projeto_id'=> $request->id]);
+    }
+        return redirect('/')->with('msg', 'Projeto editado com sucesso!');
     }
     public function show($id)
     {
@@ -101,10 +125,14 @@ class ProjetoController extends Controller
             }
         }
         $Tags = $Projeto->tags()->where('projeto_id', $Projeto->id)->get();
+        $Campus = $Projeto->campus()->where('projeto_id', $Projeto->id)->get();
 
         $ProjectOwner = User::where('id', $Projeto->user_id)->first()->toArray();
 
-        return view('projetos.show', ['Tags'=> $Tags,'hasUserApproved' => $hasUserApproved, 'Projeto' => $Projeto, 'ProjectOwner' => $ProjectOwner, 'hasUserJoined' => $hasUserJoined, 'user' => $user]);
+        return view('projetos.show', 
+        ['Campus' =>$Campus,'Tags'=> $Tags,'hasUserApproved' => $hasUserApproved, 
+        'Projeto' => $Projeto, 'ProjectOwner' => $ProjectOwner, 
+        'hasUserJoined' => $hasUserJoined, 'user' => $user]);
     }
 
     public function dashboard()
@@ -126,6 +154,7 @@ class ProjetoController extends Controller
         $Projeto = Projeto::findOrFail($id);
 
         $user->projetosAsParticipant()->attach($id, ['owner_id' => $Projeto->user_id]);
+        
 
         return redirect('/dashboard')->with('msg', 'Sua solicitação foi enviada para o projeto:' . $Projeto->name);
     }

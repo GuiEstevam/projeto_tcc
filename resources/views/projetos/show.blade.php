@@ -4,7 +4,7 @@
 
 @section('content')
 
-{{-- @dd($Tags) --}}
+{{-- @dd($Campus) --}}
 
 <div class="col-md-10 offset-md-1">
     <div class="row">
@@ -13,7 +13,11 @@
       </div>
       <div id="info-container" class="col-md-16">
         <h1>{{ $Projeto->name }}</h1>
-        <p class="event-city"><ion-icon name="location-outline"></ion-icon> {{ $Projeto->campus }}</p>
+        <p class="event-city"><ion-icon name="location-outline"></ion-icon>
+          @foreach($Campus as $Campus)
+          {{ $Campus->name }}
+          @endforeach
+        </p>
         <p class="events-participants"><ion-icon name="people-outline"></ion-icon> {{count($Projeto->users)}}  Alunos</p>
         <p class="event-owner"><ion-icon name="star-outline"></ion-icon> Orientador: {{ $ProjectOwner['name'] }}</p>
         <p class="event-tags"><ion-icon name="grid-outline"></ion-icon>
@@ -35,9 +39,9 @@
             </a>
           </form>
         @elseif($hasUserJoined && $hasUserApproved)
-          <p class="already-joined-msg"> Voce já está participando deste projeto</p>
+          <p class="already-joined-msg"> Você já está participando deste projeto</p>
         @else
-        <p class="already-joined-msg"> Voce esta aguardando aprovacao deste projeto</p>
+        <p class="already-joined-msg"> Você esta aguardando aprovação neste projeto</p>
         @endif
       </div>
       <div class="col-md-12" id="description-container">
