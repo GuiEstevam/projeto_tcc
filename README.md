@@ -20,9 +20,13 @@
     Em primeiro lugar, será necessário ter instalado o Composer, Node.JS e preferencialmente o Xampp;<br>
     Tendo essas dependencias instaladas, execute o comando: "composer install" dentro da pasta do projeto;<br>
     Em seguida, ainda dentro da pasta do projeto execute os seguintes comandos: <br>
-    ```copy .env.example .env``` 
+    ```
+    copy .env.example .env
+    ``` 
     e em seguinda<br>
-    ```php artisan key:generate```
+    ```
+    php artisan key:generate
+    ```
     <br>
     Atualize as informações do seu banco de dados dentro do arquivo .env criado; <br>
     Dentro do portal administrador do Xampp, crie um novo banco de dados com o nome utilizado nas configurações do arquivo env;<br>
