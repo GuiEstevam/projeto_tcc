@@ -5,7 +5,7 @@
 @section('content')
 
 <div id="search-container" class="col-md-12">
-    <h1>ENCONTRE UM PROJETO</h1>
+    {{-- <h1>ENCONTRE UM PROJETO</h1> --}}
     <form action="">
         <input type="text" id="search" name="search" class="form-control" placeholder="Procurar...">
     </form>

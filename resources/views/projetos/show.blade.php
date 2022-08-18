@@ -4,8 +4,6 @@
 
 @section('content')
 
-{{-- @dd($Campus) --}}
-
 <div class="col-md-10 offset-md-1">
     <div class="row">
       <div id="image-container" class="col-md-4">

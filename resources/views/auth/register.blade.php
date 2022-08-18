@@ -32,8 +32,11 @@
             <div class="mt-4">
                 <x-jet-label for="role_id" value="{{ __('Se cadastrar como:') }}"/>
                 <select name="role_id" class="block mt-1 w-full">
-                    <option value="1">Estudante</option>
-                    <option value="2">Orientador</option>
+                    @if (!empty(User::all()))
+                    <option value="1">Administrador</option>
+                    @endif
+                    <option value="2">Estudante</option>
+                    <option value="3">Orientador</option>
                 </select>
             </div>
 

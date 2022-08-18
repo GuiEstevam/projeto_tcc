@@ -36,12 +36,16 @@
               <li class="nav-item">
                 <a href="/" class="nav-link">Conversas</a>
               </li>
-              <li class="nav-item">
-                <a href="/tags/listagem" class="nav-link">Tags</a>
-              </li>
-              <li class="nav-item">
-                <a href="/campus/listagem" class="nav-link">Campus</a>
-              </li>
+              @auth
+                @if (Auth::user()->role_id == 1)
+                <li class="nav-item">        
+                  <a href="/tags/listagem" class="nav-link">Tags</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/campus/listagem" class="nav-link">Campus</a>
+                </li>
+                @endif
+              @endauth
                 @guest
                   <li class="nav-item">
                     <a href="/register" class="nav-link">Cadastrar</a>
@@ -82,7 +86,7 @@
           </div>
         </main>
       <footer>
-        <p>Projeto Orientador &copy; 2022</p>
+        <p>Horientando &copy; 2022</p>
       </footer>
       <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     </body>

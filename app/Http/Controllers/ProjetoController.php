@@ -16,8 +16,10 @@ class ProjetoController extends Controller
 
     public function index()
     {
+        $users = User::all();
+        $user = auth()->user();
         $Projeto = Projeto::all();
-        return view('welcome', ['Projeto' => $Projeto]);
+        return view('welcome', ['Projeto' => $Projeto, 'user' => $user, 'users' => $users]);
     }
 
     public function create()
