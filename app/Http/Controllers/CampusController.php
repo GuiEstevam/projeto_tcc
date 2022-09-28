@@ -26,7 +26,7 @@ class CampusController extends Controller
         $Campus->disponibility = $request->disponibility;
 
         $Campus->save();
-        return redirect('/campus/listagem')->with('msg', 'Campus criado com sucesso!');
+        return back()->with('msg', 'Campus criado com sucesso!');
     }
 
     public function destroy($id)

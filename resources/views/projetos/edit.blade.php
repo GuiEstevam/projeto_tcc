@@ -22,7 +22,15 @@
     </div>
     <div class="form-group">
       <label for="title">Campus</label>
-      <input type="text" class="form-control" id="campus" name="campus" placeholder="Campus onde será realizado" value= "{{$Projeto->campus}}">
+      <select class="form-control" id="campus" name="campus" 
+      placeholder="Campus onde será realizado">
+      {{-- @foreach ( $SelectedCampus as $SelectedCampus )
+          <option value = "{{$SelectedCampus->id}}">{{$SelectedCampus->name}}</option> 
+      @endforeach  --}}
+      @foreach($Campus as $Campus)
+        <option value="{{$Campus->id}}">{{$Campus->name}}</option>
+      @endforeach
+      </select>
     </div>
     <div class="form-group">
       <label for="title">Descreva o seu projeto:</label>

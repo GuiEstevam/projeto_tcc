@@ -26,7 +26,7 @@ class TagController extends Controller
         $Tag->disponibility = $request->disponibility;
 
         $Tag->save();
-        return redirect('/tags/listagem')->with('msg', 'Tag criado com sucesso!');
+        return back()->with('msg', 'Tag criado com sucesso!');
     }
 
     public function destroy($id)

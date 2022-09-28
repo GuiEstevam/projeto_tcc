@@ -73,15 +73,22 @@ class ProjetoController extends Controller
 
     public function edit($id)
     {
+        $Campus = Campus::all();
         $Tags = Tag::all();
         $user = auth()->user();
         $Projeto = Projeto::findOrFail($id);
+        // $SelectedCampus = $Campus->CampusProjects()->where('projeto_id', $id)->first()->toArray();
         $SelectedTags = $Projeto->tags()->where('projeto_id', $id)->get();
 
         if ($user->id != $Projeto->user_id) {
             return redirect('/dashboard');
         }
-        return view('projetos.edit', ['Projeto' => $Projeto, 'SelectedTags'=> $SelectedTags, 'Tags'=> $Tags]);
+        return view('projetos.edit', 
+        ['Projeto' => $Projeto, 
+        'SelectedTags'=> $SelectedTags,
+        'Campus' => $Campus,
+        // 'SelectedCampus' =>$SelectedCampus,
+        'Tags'=> $Tags]);
     }
 
     public function update(Request $request)
@@ -158,7 +165,7 @@ class ProjetoController extends Controller
         $user->projetosAsParticipant()->attach($id, ['owner_id' => $Projeto->user_id]);
         
 
-        return redirect('/dashboard')->with('msg', 'Sua solicitação foi enviada para o projeto:' . $Projeto->name);
+        return back()->with('msg', 'Sua solicitação foi enviada para o projeto: ' . $Projeto->name);
     }
 
     public function leaveProject($id)
