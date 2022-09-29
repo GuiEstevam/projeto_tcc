@@ -42,3 +42,7 @@ Route::get('/campus/listagem', [CampusController::class, 'listagem'])->middlewar
 Route::get('/campus/create', [CampusController::class, 'create'])->middleware('auth');
 Route::post('/campus', [CampusController::class, 'store'])->middleware('auth');
 Route::delete('/campus/{id}', [CampusController::class, 'destroy'])->middleware('auth');
+
+//Profile 
+
+Route::get('/profile/main-profile',[ProfileController::class,'index'])->middleware('auth');

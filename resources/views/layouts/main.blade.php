@@ -11,14 +11,43 @@
 
         <!-- CSS Bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
         <!-- CSS da aplicação -->
         <link rel="stylesheet" href="/css/styles.css">
         <script src="/js/scripts.js"></script>
     </head>
     <body>
-      <header>
-        <nav class="navbar navbar-expand-md navbar-light">
+    <header>
+      <section id="nav">
+      <nav class="navbar navbar-light navbar-expand-md py-2">
+          <a href="index.html">
+              <p>Test Image here</p>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarLinks"><span
+                  class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarLinks">
+              <ul class="nav">
+                  <li class="nav-item">
+                      <a class="nav-link" href="index.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="flavors.html">Flavors</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="details.html">What's Included</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="reserve.html">Reserve Today</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="faq.html">FAQ</a>
+                  </li>
+              </ul>
+          </div>
+      </nav>
+<!--/.Navbar-->
+
+        {{-- <nav class="navbar navbar-expand-md navbar-light">
           <div class="collapse navbar-collapse" id="navbar">
             <a href="/" class="navbar-brand">
               <img src="/img/logo.png" alt="Projeto_TCC">
@@ -73,7 +102,7 @@
             </ul>
           </div>
         </nav>
-        
+         --}}
       </header>
         <main>
           <div class="container-fluid">
@@ -89,5 +118,7 @@
         <p>Horientando &copy; 2022</p>
       </footer>
       <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
