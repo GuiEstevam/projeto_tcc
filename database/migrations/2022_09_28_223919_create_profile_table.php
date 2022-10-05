@@ -13,12 +13,15 @@ class CreateProfileTable extends Migration
      */
     public function up()
     {
-        Schema::create('profile', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->boolean('show_email')->default(0);
             $table->text('description');
-            $table->
+            $table->integer('semester');
+            $table->boolean('disponibility');
             $table->timestamps();
+            $table->integer('user_id')->constrained();
         });
     }
 
@@ -29,6 +32,6 @@ class CreateProfileTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profile');
+        Schema::dropIfExists('profiles');
     }
 }

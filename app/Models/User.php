@@ -74,4 +74,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Projeto')->withPivot('situacao');
     }
+
+    public function profile(){
+        return $this->hasOne(Profile::class);
+    }
 }

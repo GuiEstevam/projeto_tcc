@@ -17,37 +17,7 @@
     </head>
     <body>
     <header>
-      <section id="nav">
-      <nav class="navbar navbar-light navbar-expand-md py-2">
-          <a href="index.html">
-              <p>Test Image here</p>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarLinks"><span
-                  class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarLinks">
-              <ul class="nav">
-                  <li class="nav-item">
-                      <a class="nav-link" href="index.html">Home</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="flavors.html">Flavors</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="details.html">What's Included</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="reserve.html">Reserve Today</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="faq.html">FAQ</a>
-                  </li>
-              </ul>
-          </div>
-      </nav>
-<!--/.Navbar-->
-
-        {{-- <nav class="navbar navbar-expand-md navbar-light">
+        <nav class="navbar navbar-expand-md navbar-light">
           <div class="collapse navbar-collapse" id="navbar">
             <a href="/" class="navbar-brand">
               <img src="/img/logo.png" alt="Projeto_TCC">
@@ -102,7 +72,6 @@
             </ul>
           </div>
         </nav>
-         --}}
       </header>
         <main>
           <div class="container-fluid">
