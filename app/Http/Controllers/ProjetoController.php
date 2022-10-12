@@ -146,13 +146,17 @@ class ProjetoController extends Controller
 
     public function dashboard()
     {
+        $Users = User::all();
         $user = auth()->user();
         $Projeto = $user->projetos;
         $projetosAsParticipant = $user->projetosAsParticipant;
 
         return view(
             'projetos.dashboard',
-            ['Projetos' => $Projeto, 'projetosAsParticipant' => $projetosAsParticipant]
+            ['Projetos' => $Projeto, 
+            'projetosAsParticipant' => $projetosAsParticipant,
+            'Users' => $Users,
+            'User' => $user]
         );
     }
 

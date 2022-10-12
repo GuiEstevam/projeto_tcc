@@ -4,6 +4,9 @@
 
 @section('content')
 
+@if(count($Users) == 1 && $User->role_id != 1)
+<a href="/profile/setAdministrator/" class="col-md-10 offset-md-1 administrator-button btn btn-primary">Tornar Administrador</a>
+@endif
 <div class="col-md-10 offset-md-1 dashboard-title-container">
     <h1>MEUS PROJETOS</h1>
 </div>

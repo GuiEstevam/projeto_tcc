@@ -202,6 +202,10 @@ header {
 }
 
 /* Dashboard */
+.administrator-buttom {
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
 .dashboard-title-container {
   margin-bottom: 30px;
   margin-top: 30px;
