@@ -1,6 +1,6 @@
 /* General */
 * {
-  font-family: 'Roboto',sans-serif;
+  font-family: 'Inter',sans-serif;
 }
 
 body {
@@ -199,6 +199,10 @@ header {
 #description-container {
   font-size: 20px;
   margin-top: 30px;
+}
+
+#selectpicker {
+  border: 1px !important; 
 }
 
 /* Dashboard */

@@ -12,6 +12,16 @@
       <label for="image">Coloque uma imagem de perfil:</label>
       <input type="file" id="image" name="image" class="form-control-file">
     </div>
+    <div class="img-holder">
+
+    </div>
+    <div class="form-group">
+      <label for="title"> Gostaria que seu e-mail ficasse disponivel no perfil?</label><br> 
+      <input type="checkbox" title="Sim" name="show_email" value = "1">
+      <label for="title"> Sim</label> 
+      <input type="checkbox" name="show_email" value = "0">
+      <label for="title"> Não</label> 
+  </div>
     @if($User->role_id == 2)
     <div class="form-group">    
         <label for="title">Em qual semestre você está?</label>
@@ -33,24 +43,28 @@
     </div>
     <div class="form-group">
       <label for="title">Selecione as tags que melhor te representam:</label>
-        <select class="selectpicker col-12" multiple data-live-search="true" title="TAGS" name="tags[]">
+        <select class="selectpicker form-control" multiple data-live-search="true" title="TAGS" name="tags[]">
           @foreach($Tag as $Tag)
             <option value="{{$Tag->id}}">{{$Tag->name}}</option>
           @endforeach
       </select>
     </div>
     <div class="form-group">
-        <label for="title"> Gostaria que seu e-mail ficasse disponivel no perfil?</label><br> 
-        <input type="checkbox" title="Sim" name="show_email">
-        <label for="title"> Sim</label> 
-        <input type="checkbox" name="show_email">
-        <label for="title"> Não</label> 
-
-    </div>
-    <div class="form-group">
-      <input type="submit" class="btn btn-primary" value="Finalizar perfil">
+      <input type="submit" class="btn btn-primary mt-3" value="Finalizar perfil">
     </div>
   </form>
 </div>
+<script>
+$('input[type="file"][name="image"]').val('');
+
+$('input[type="file"][name="image"]').on('change', function(){
+  var img_path = $(this)[0].value;
+  var img_holder = $('.img-holder');
+  var extension = img_path.substring(img_path.lastIndexOf('.')+1).toLowerCase();
+
+  alert(extension);
+})
+
+</script>
 
 @endsection
