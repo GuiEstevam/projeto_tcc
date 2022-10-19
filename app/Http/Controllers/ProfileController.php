@@ -16,14 +16,24 @@ class ProfileController extends Controller
         $users = User::all();
         $user = auth()->user();
         $Projeto = Projeto::all();
-        return view('welcome', ['Projeto' => $Projeto, 'user' => $user, 'users' => $users]);
+        return view('profile.mainProfile', ['Projeto' => $Projeto, 'user' => $user, 'users' => $users]);
     }
     
     public function setAdministrator(){
         $user = Auth()->user();
         $user->role_id = 1;
         $user->save();
-        return redirect('/')->with('msg', 'Parabéns! Agora você é administrador do sistema');
+        return redirect('/dashboard')->with('msg', 'Parabéns! Agora você é administrador do sistema');
 
+    }
+    public function create()
+    {
+        $User = Auth()->user();
+        $Tag = Tag::all();
+        $Campus = Campus::all();
+        return view('profile.createProfile', 
+        ['Tag' => $Tag, 
+        'Campus'=>$Campus,
+        'User'=> $User]);
     }
 }
