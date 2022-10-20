@@ -8,15 +8,15 @@
   <h1>Cadastre seu projeto </h1>
   <form action="/projetos" method="POST" enctype="multipart/form-data">
    @csrf
-   <div class="form-group">
+   <div class="form-group col-12">
       <label for="image">Imagem referente ao projeto:</label>
-      <input type="file" id="image" name="image" class="form-control-file">
+      <input type="file" id="image" name="image" class="form-control">
     </div>
-    <div class="form-group">
+    <div class="form-group col-12">
       <label for="title">Nome do projeto:</label>
       <input type="text" class="form-control" id="name" name="name" placeholder="Nome do projeto">
     </div>
-    <div class="form-group">
+    <div class="form-group col-12">
       <label for="title">Campus onde será realizado:</label>
       <select class="form-control" id="campus" name="campus" placeholder="Campus onde será realizado">
         <option value =""></option>
@@ -25,19 +25,19 @@
         @endforeach
       </select>
     </div>
-    <div class="form-group">
+    <div class="form-group col-12">
       <label for="title">Descreva o seu projeto:</label>
       <textarea name="description" id="description" class="form-control" placeholder="Comente a respeito do seu projeto"></textarea>
     </div>
-    <div class="form-group">
+    <div class="form-group col-12">
       <label for="title">Tags:</label>
-        <select class="selectpicker col-12" multiple data-live-search="true" title="Selecione as TAGS" name="tags[]">
+        <select class="selectpicker form-control" multiple data-live-search="true" title="Selecione as TAGS" name="tags[]">
           @foreach($Tag as $Tag)
             <option value="{{$Tag->id}}">{{$Tag->name}}</option>
           @endforeach
       </select>
     </div>
-    <div class="form-group">
+    <div class="form-group col-12 text-right">
       <input type="submit" class="btn btn-primary" value="Criar Projeto">
     </div>
   </form>

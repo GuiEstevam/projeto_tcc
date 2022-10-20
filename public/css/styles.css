@@ -159,6 +159,12 @@ header {
   font-size: 12px;
 }
 
+#event-create-container h4{
+  font-size: 34px;
+  font-weight: 800;
+  text-align: center;
+}
+
 /* Project page */
 #image-container,
 #info-container {
