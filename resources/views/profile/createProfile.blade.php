@@ -10,19 +10,16 @@
    @csrf
    <div class="form-group">
       <label for="image">Coloque uma imagem de perfil:</label>
-      <input type="file" id="image" name="image" class="form-control-file">
+      <input type="file" id="image" name="image" class="form-control">
     </div>
     <div class="img-holder">
 
     </div>
-    <div class="form-group">
-      <label for="title"> Gostaria que seu e-mail ficasse disponivel no perfil?</label><br> 
-      <input type="checkbox" title="Sim" name="show_email" value = "1">
-      <label for="title"> Sim</label> 
-      <input type="checkbox" name="show_email" value = "0">
-      <label for="title"> Não</label> 
-  </div>
     @if($User->role_id == 2)
+    <div class="form-group">    
+      <label for="title">Em qual curso você está realizando no momento?</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Insira o nome do curso aqui">
+  </div>
     <div class="form-group">    
         <label for="title">Em qual semestre você está?</label>
         <input type="text" class="form-control" id="name" name="name" placeholder="Insira o semestre aqui">
@@ -30,7 +27,7 @@
     @endif
     <div class="form-group">
       <label for="title">Informe seu campus:</label>
-      <select class="form-control" id="campus" name="campus" placeholder="Campus onde será realizado">
+      <select class="form-control" id="campus" name="campus" placeholder="Selecione seu campus aqui">
         <option value =""></option>
         @foreach ($Campus as $Campus)
           <option value = "{{$Campus->id}}">{{$Campus->name}}</option>
@@ -40,6 +37,13 @@
     <div class="form-group">
       <label for="title">Descreva um pouco sobre você:</label>
       <textarea name="description" id="description" class="form-control" placeholder="Insira uma descrição sobre você"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="title">Outras formações acadêmicas:</label>
+      <!-- Botão para acionar modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExperience">
+        Adicionar nova formação
+      </button>
     </div>
     <div class="form-group">
       <label for="title">Selecione as tags que melhor te representam:</label>
@@ -54,6 +58,44 @@
     </div>
   </form>
 </div>
+      <!-- Modal de nova experiência -->
+      <div class="modal fade" id="modalExperience" tabindex="-1" role="dialog" aria-labelledby="modalExperience" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="ExperienceModalLabel">Adicionar nova formação</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group col-12">
+                <label for="title">Nome do curso</label>
+                <input type="text" class="form-control" id="experienceNameId" name="experienceName" placeholder="Insira o nome do curso aqui">
+              </div>
+              <div class="form-group col-12">
+                <label for="title">Instituição de Ensino</label>
+                <input type="text" class="form-control" id="experienceInstitutionId" name="experienceInstitution" placeholder="Insira o nome da instituição aqui">
+              </div>
+              <div class="row">
+                  <div class="form-group col-6">
+                    <label for="title">Data de ínicio</label>
+                    <input type="date" class="form-control" id="experienceFirstDateId" name="experienceFirstDate">
+                </div>
+                  <div class="form-group col-6">
+                    <label for="title">Data fim</label>
+                    <input type="date" class="form-control" id="experienceLastDateId" name="experienceLastDate">
+                  </div>
+              </div>
+            </div>              
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="button" class="btn btn-primary">Salvar mudanças</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 <script>
 $('input[type="file"][name="image"]').val('');
 
