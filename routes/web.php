@@ -50,4 +50,7 @@ Route::delete('/campus/{id}', [CampusController::class, 'destroy'])->middleware(
 Route::get('/profile/createProfile',[ProfileController::class,'create']);
 Route::get('/profile/mainProfile',[ProfileController::class,'index'])->middleware('auth');
 Route::get('/profile/setAdministrator',[ProfileController::class,'setAdministrator'])->middleware('auth');
+
+// Experience
 Route::post('/profile/createExperience',[ExperienceController::class,'storeExperience'])->middleware('auth');
+Route::get('/profile/delete/{id}', [ExperienceController::class, 'destroy'])->middleware('auth');

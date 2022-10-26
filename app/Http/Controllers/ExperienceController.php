@@ -18,6 +18,17 @@ class ExperienceController extends Controller
     }
 
     public function storeExperience(Request $request){
+        if(!empty($request->id)){
+            $Experience = Experience::findOrFail($request->id);
+
+            $Experience->update([
+                'experienceName' => $request->experienceName,
+                'institutionName' => $request->experienceInstitution,
+                'firstDate' => $request->experienceFirstDate,
+                'lastDate' => $request->experienceLastDate
+            ]);
+        }
+
         $user = auth()->user();
         $Experience = new Experience;
 
@@ -91,8 +102,11 @@ class ExperienceController extends Controller
      * @param  \App\Models\Experience  $experience
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Experience $experience)
+    public function destroy($id)
     {
-        //
+        $Experience = Experience::findOrFail($id);
+        $Experience->delete();
+
+        return back()->with('msg', 'Experiência excluída com sucesso!');
     }
 }

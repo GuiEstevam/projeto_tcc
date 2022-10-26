@@ -9,6 +9,8 @@ class Experience extends Model
 {
     use HasFactory;
 
+    protected $dates = ['firstDate', 'lastDate'];
+
 public function user()
 {
     return $this->belongsTo('App\Models\User');
