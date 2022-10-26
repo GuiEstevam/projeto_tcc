@@ -31,9 +31,13 @@ class ProfileController extends Controller
         $User = Auth()->user();
         $Tag = Tag::all();
         $Campus = Campus::all();
+
+        $Experiences = $User->experience;
+
         return view('profile.createProfile', 
-        ['Tag' => $Tag, 
-        'Campus'=>$Campus,
+        ['Campus'=>$Campus,
+        'Experiences' => $Experiences, 
+        'Tag' => $Tag, 
         'User'=> $User]);
     }
 }

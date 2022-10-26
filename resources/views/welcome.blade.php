@@ -10,7 +10,7 @@
         <input type="text" id="search" name="search" class="form-control" placeholder="Procurar...">
     </form>
 </div>
-<div id="events-container" class="col-12">
+<div id="events-container" class="col-md-12">
     <h2>PROJETOS DISPONÍVEIS</h2>
     <p class="subtitle">Veja os projetos que estão disponíveis</p>
     <div id="cards-container" class="row">
@@ -26,4 +26,5 @@
         @endforeach
     </div>
 </div>
+
 @endsection

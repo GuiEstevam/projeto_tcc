@@ -38,14 +38,21 @@
       <label for="title">Descreva um pouco sobre você:</label>
       <textarea name="description" id="description" class="form-control" placeholder="Insira uma descrição sobre você"></textarea>
     </div>
+    <!-- Botão para acionar modal -->
     <div class="col-12 text-right mt-3">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExperience">
         Adicionar nova formação
       </button>
     </div>
       <div class="form-group col-12 mt-3">
-        <label for="title">Outras formações acadêmicas:</label>
-        <!-- Botão para acionar modal -->
+        <label for="title">Outras formações acadêmicas:</label><br>
+        @foreach ($Experiences as $Experience)
+      Curso: {{$Experience->experienceName}}<br>
+      Instituição: {{ $Experience->institutionName }}<br>
+      Data de inicio: {{ $Experience->firstDate }}<br>
+      Data de inicio: {{ $Experience->lastDate }}<br>
+      <hr>
+        @endforeach
       </div>
     <div class="form-group col-12">
       <label for="title">Selecione as tags que melhor te representam:</label>
@@ -71,29 +78,32 @@
               </button>
             </div>
             <div class="modal-body">
-              <div class="form-group col-12">
-                <label for="title">Nome do curso</label>
-                <input type="text" class="form-control" id="experienceNameId" name="experienceName" placeholder="Insira o nome do curso aqui">
-              </div>
-              <div class="form-group col-12">
-                <label for="title">Instituição de Ensino</label>
-                <input type="text" class="form-control" id="experienceInstitutionId" name="experienceInstitution" placeholder="Insira o nome da instituição aqui">
-              </div>
-              <div class="row">
-                  <div class="form-group col-6">
-                    <label for="title">Data de ínicio</label>
-                    <input type="date" class="form-control" id="experienceFirstDateId" name="experienceFirstDate">
+              <form form action="/profile/createExperience" method="POST" enctype="multipart/form-data">
+                @csrf 
+                <div class="form-group col-12">
+                  <label for="title">Nome do curso</label>
+                  <input type="text" class="form-control" id="experienceNameId" name="experienceName" placeholder="Insira o nome do curso aqui">
                 </div>
-                  <div class="form-group col-6">
-                    <label for="title">Data fim</label>
-                    <input type="date" class="form-control" id="experienceLastDateId" name="experienceLastDate">
+                <div class="form-group col-12">
+                  <label for="title">Instituição de Ensino</label>
+                  <input type="text" class="form-control" id="experienceInstitutionId" name="experienceInstitution" placeholder="Insira o nome da instituição aqui">
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                      <label for="title">Data de ínicio</label>
+                      <input type="date" class="form-control" id="experienceFirstDateId" name="experienceFirstDate">
                   </div>
-              </div>
-            </div>              
+                    <div class="form-group col-6">
+                      <label for="title">Data fim</label>
+                      <input type="date" class="form-control" id="experienceLastDateId" name="experienceLastDate">
+                    </div>
+                </div>
+              </div>              
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-              <button type="button" class="btn btn-primary">Salvar mudanças</button>
+              <button type="submit" class="btn btn-primary">Salvar mudanças</button>
             </div>
+          </form>
           </div>
         </div>
       </div>
