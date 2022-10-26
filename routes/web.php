@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjetoController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CampusController;
+use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\ProfileController;
 
 // Projetos
@@ -49,3 +50,4 @@ Route::delete('/campus/{id}', [CampusController::class, 'destroy'])->middleware(
 Route::get('/profile/createProfile',[ProfileController::class,'create']);
 Route::get('/profile/mainProfile',[ProfileController::class,'index'])->middleware('auth');
 Route::get('/profile/setAdministrator',[ProfileController::class,'setAdministrator'])->middleware('auth');
+Route::post('/profile/createExperience',[ExperienceController::class,'storeExperience'])->middleware('auth');

@@ -77,7 +77,6 @@ class ProjetoController extends Controller
         $Tags = Tag::all();
         $user = auth()->user();
         $Projeto = Projeto::findOrFail($id);
-        // $SelectedCampus = $Campus->CampusProjects()->where('projeto_id', $id)->first()->toArray();
         $SelectedTags = $Projeto->tags()->where('projeto_id', $id)->get();
 
         if ($user->id != $Projeto->user_id) {
