@@ -48,6 +48,7 @@ Route::delete('/campus/{id}', [CampusController::class, 'destroy'])->middleware(
 //Profile 
 
 Route::get('/profile/createProfile',[ProfileController::class,'create']);
+Route::post('/profile', [ProfileController::class, 'store'])->middleware('auth');
 Route::get('/profile/mainProfile',[ProfileController::class,'index'])->middleware('auth');
 Route::get('/profile/setAdministrator',[ProfileController::class,'setAdministrator'])->middleware('auth');
 

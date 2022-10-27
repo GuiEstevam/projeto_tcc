@@ -6,7 +6,7 @@
 
 <div id="event-create-container" class="col-md-6 offset-md-3">
   <h4>Finalize seu perfil! </h4>
-  <form action="/" method="POST" enctype="multipart/form-data">
+  <form action="/profile" method="POST" enctype="multipart/form-data">
    @csrf
     <div class="form-group col-12">
       <label for="image" style="Roboto">Coloque uma imagem de perfil:</label>
@@ -17,11 +17,16 @@
     @if($User->role_id == 2)
     <div class="form-group col-12">    
       <label for="title">Qual curso você está realizando no momento?</label>
-      <input type="text" class="form-control" id="name" name="name" placeholder="Insira o nome do curso aqui">
+      <input type="text" class="form-control" id="graduation" name="graduation" placeholder="Insira o nome do curso aqui">
     </div>
     <div class="form-group col-12">    
         <label for="title">Em qual semestre você está?</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Insira o semestre aqui">
+        <input type="text" class="form-control" id="semester" name="semester" placeholder="Insira o semestre aqui">
+    </div>
+    @elseif($User->role_id == 3)
+    <div class="form-group col-12">    
+      <label for="title">Você é responsável por qual disciplina?</label>
+      <input type="text" class="form-control" id="graduation" name="graduation" placeholder="Insira o nome do curso aqui">
     </div>
     @endif
     <div class="form-group col-12">
@@ -29,7 +34,7 @@
       <select class="form-control" id="campus" name="campus" placeholder="Selecione seu campus aqui">
         <option value =""></option>
         @foreach ($Campus as $Campus)
-          <option value = "{{$Campus->id}}">{{$Campus->name}}</option>
+          <option value = "{{$Campus->name}}">{{$Campus->name}}</option>
         @endforeach
       </select>
     </div>
@@ -38,7 +43,7 @@
       <textarea name="description" id="description" class="form-control" placeholder="Insira uma descrição sobre você"></textarea>
     </div>
     <!-- Botão para acionar modal -->
-    <div class="col-12 mt-3 text-right">
+    <div class="col-12  text-right">
       <a href="#" data-toggle="modal" data-target="#modalExperience">
         <ion-icon name="add-outline"></ion-icon>
       </a>
@@ -64,7 +69,7 @@
       </div>
     <div class="form-group col-12">
       <label for="title">Selecione as tags que melhor te representam:</label>
-        <select class="selectpicker form-control" multiple data-live-search="true" title="TAGS" name="tags[]">
+        <select class="form-control col-12" multiple data-live-search="true" title="TAGS" name="tags[]">
           @foreach($Tag as $Tag)
             <option value="{{$Tag->id}}">{{$Tag->name}}</option>
           @endforeach

@@ -16,12 +16,12 @@ class CreateProfileTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->boolean('show_email')->default(0);
-            $table->text('description');
+            $table->string('graduation');
             $table->integer('semester');
+            $table->text('description');
             $table->boolean('disponibility');
-            $table->timestamps();
             $table->integer('user_id')->constrained();
+            $table->timestamps();
         });
     }
 

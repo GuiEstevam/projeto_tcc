@@ -35,7 +35,7 @@
     </div>
     <div class="form-group">
       <label for="title">Tags:</label>
-        <select class="selectpicker col-12" multiple data-live-search="true" title="Selecione as TAGS" name="tags[]">
+        <select class="form-control col-12" multiple data-live-search="true" title="Selecione as TAGS" name="tags[]">
           @foreach($Tags as $Tags)
             <option value="{{$Tags->id}}">{{$Tags->name}}</option>
           @endforeach
