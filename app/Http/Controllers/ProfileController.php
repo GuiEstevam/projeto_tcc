@@ -29,17 +29,27 @@ class ProfileController extends Controller
     }
     public function create()
     {
-        $User = Auth()->user();
-        $Tag = Tag::all();
-        $Campus = Campus::all();
+        $Users = User::all();
+        $user = Auth()->user();
+        $Projeto = $user->projetos;
+        $projetosAsParticipant = $user->projetosAsParticipant;
 
-        $Experiences = $User->experience;
+        $id = $user->id;
+        $Profile = Profile::findOrFail($id);
+        $Experiences = $user->experience;
 
-        return view('profile.createProfile', 
-        ['Campus'=>$Campus,
-        'Experiences' => $Experiences, 
-        'Tag' => $Tag, 
-        'User'=> $User]);
+        if(empty($Profile)){
+            $Tag = Tag::all();
+            $Campus = Campus::all();
+            error_log('Some message here.');
+            return view('profile.createProfile', 
+            ['Campus'=> $Campus,
+            'Experiences' => $Experiences, 
+            'Tag' => $Tag, 
+            'User'=> $user]);
+        }
+        
+        return redirect('/dashboard')->with('msg', 'Perfil criado com sucesso!');
     }
     public function store(Request $request){
         $Profile = new Profile;

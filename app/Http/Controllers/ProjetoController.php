@@ -149,6 +149,8 @@ class ProjetoController extends Controller
         $user = auth()->user();
         $Projeto = $user->projetos;
         $projetosAsParticipant = $user->projetosAsParticipant;
+        error_log('Some message here.');
+
 
         return view(
             'projetos.dashboard',

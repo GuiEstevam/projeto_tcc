@@ -19,7 +19,7 @@ class CreateProfileTable extends Migration
             $table->string('graduation');
             $table->integer('semester');
             $table->text('description');
-            $table->boolean('disponibility');
+            $table->boolean('disponibility')->default(0);
             $table->integer('user_id')->constrained();
             $table->timestamps();
         });
