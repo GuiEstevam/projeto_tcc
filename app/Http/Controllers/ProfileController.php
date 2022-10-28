@@ -12,12 +12,16 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
-    public function index()
+    public function show()
     {
-        $users = User::all();
         $user = auth()->user();
-        $Projeto = Projeto::all();
-        return view('profile.mainProfile', ['Projeto' => $Projeto, 'user' => $user, 'users' => $users]);
+        $tags = Tag::all();
+        $experiences = $user->experience;
+        return view('profile.show', 
+        ['experencie' => $experiences,
+        'tag' => $tags,
+        'user' => $user, 
+        ]);
     }
     
     public function setAdministrator(){
@@ -29,28 +33,18 @@ class ProfileController extends Controller
     }
     public function create()
     {
-        $Users = User::all();
-        $user = Auth()->user();
-        $Projeto = $user->projetos;
-        $projetosAsParticipant = $user->projetosAsParticipant;
+        $User = Auth()->user();
+        $Tag = Tag::all();
+        $Campus = Campus::all();
+        $Experiences = $User->experience;
 
-        $id = $user->id;
-        $Profile = Profile::findOrFail($id);
-        $Experiences = $user->experience;
-
-        if(empty($Profile)){
-            $Tag = Tag::all();
-            $Campus = Campus::all();
-            error_log('Some message here.');
-            return view('profile.createProfile', 
-            ['Campus'=> $Campus,
-            'Experiences' => $Experiences, 
-            'Tag' => $Tag, 
-            'User'=> $user]);
-        }
-        
-        return redirect('/dashboard')->with('msg', 'Perfil criado com sucesso!');
+        return view('profile.createProfile', 
+        ['Campus'=>$Campus,
+        'Experiences' => $Experiences, 
+        'Tag' => $Tag, 
+        'User'=> $User]);
     }
+
     public function store(Request $request){
         $Profile = new Profile;
 
