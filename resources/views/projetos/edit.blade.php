@@ -17,6 +17,11 @@
     @csrf
     @method('PUT')
     <div class="form-group">
+      <label for="image">Imagem do Projeto:</label>
+      <input type="file" id="image" name="image" class="from-control-file">
+      <img src="/img/projects/{{ $Projeto->image }}" alt="{{ $Projeto->name }}" class="img-preview">
+    </div>
+    <div class="form-group">
       <label for="title">Nome:</label>
       <input type="text" class="form-control" id="name" name="name" placeholder="Nome do orientador" value= "{{$Projeto->name}}">
     </div>

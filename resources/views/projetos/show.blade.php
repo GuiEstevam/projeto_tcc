@@ -9,7 +9,7 @@
     <div id="image-container" class="col-md-4">
       <img src="/img/projects/{{ $Projeto->image }}" class="img-fluid" alt="{{ $Projeto->name }}">
     </div>
-    <div id="info-container" class="col-md-16">
+    <div id="info-container" class="col-md-8">
       <h1>{{ $Projeto->name }}</h1>
       <p class="event-city"><ion-icon name="location-outline"></ion-icon>
         @foreach($Campus as $Campus)
@@ -17,7 +17,7 @@
         @endforeach
       </p>
       <p class="events-participants"><ion-icon name="people-outline"></ion-icon> {{count($Projeto->users)}}  Alunos</p>
-      <p class="event-owner"><ion-icon name="star-outline"></ion-icon> Orientador: {{ $ProjectOwner['name'] }}</p>
+      <p class="event-owner"><a href="/profile/show/{{$ProjectOwner['id']}}"><ion-icon name="star-outline"></ion-icon> Orientador: {{ $ProjectOwner['name'] }}</a></p>
       <p class="event-tags"><ion-icon name="grid-outline"></ion-icon>
         @foreach ($Tags as $Tags)
           {{$Tags->name}}

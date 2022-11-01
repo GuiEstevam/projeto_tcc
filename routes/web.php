@@ -49,7 +49,9 @@ Route::delete('/campus/{id}', [CampusController::class, 'destroy'])->middleware(
 
 Route::get('/profile/createProfile',[ProfileController::class,'create']);
 Route::post('/profile', [ProfileController::class, 'store'])->middleware('auth');
-Route::get('/profile/mainProfile',[ProfileController::class,'index'])->middleware('auth');
+Route::get('/profile/edit/{id}', [ProfileController::class, 'edit'])->middleware('auth');
+Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->middleware('auth');
+Route::get('/profile/show/{id}',[ProfileController::class,'show'])->middleware('auth');
 Route::get('/profile/setAdministrator',[ProfileController::class,'setAdministrator'])->middleware('auth');
 
 // Experience

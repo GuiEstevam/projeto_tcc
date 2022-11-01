@@ -1,32 +1,34 @@
 @extends('layouts.main')
 
-@section('title', 'Complete seu perfil!')
+@section('title', 'Edição de perfil')
 
 @section('content')
 
 <div id="event-create-container" class="col-md-6 offset-md-3">
-  <h4>Finalize seu perfil! </h4>
-  <form action="/profile" method="POST" enctype="multipart/form-data">
+  <h4>Editando o perfil de: {{$User->name}} </h4>
+  <form action="/profile/update/{{$Profile->id}}" method="POST" enctype="multipart/form-data">
    @csrf
+   @method('PUT')
     <div class="form-group col-12">
-      <label for="image" style="Roboto">Coloque uma imagem de perfil:</label>
-      <input type="file" id="image" name="image" class="form-control">
+      <label for="profile_photo_path">Coloque uma imagem de perfil:</label>
+      <input type="file" id="image" name="profile_photo_path" class="form-control">
+      <img src="/img/profile_photo/{{ $Profile->profile_photo_path }}" alt="{{ $User->name }}" class="profile-photo-preview">
     </div>
     <div class="img-holder">
     </div>
     @if($User->role_id == 2)
     <div class="form-group col-12">    
       <label for="title">Qual curso você está realizando no momento?</label>
-      <input type="text" class="form-control" id="graduation" name="graduation" placeholder="Insira o nome do curso aqui">
+      <input type="text" class="form-control" id="graduation" name="graduation" placeholder="Insira o nome do curso aqui" value={{$Profile->graduation}}>
     </div>
     <div class="form-group col-12">    
         <label for="title">Em qual semestre você está?</label>
-        <input type="text" class="form-control" id="semester" name="semester" placeholder="Insira o semestre aqui">
+        <input type="text" class="form-control" id="semester" name="semester" placeholder="Insira o semestre aqui" value={{$Profile->semester}}>
     </div>
     @elseif($User->role_id == 3)
     <div class="form-group col-12">    
       <label for="title">Você é responsável por qual disciplina?</label>
-      <input type="text" class="form-control" id="graduation" name="graduation" placeholder="Insira o nome do curso aqui">
+      <input type="text" class="form-control" id="graduation" name="graduation" placeholder="Insira o nome do curso aqui" value={{$Profile->graduation}}>
     </div>
     @endif
     <div class="form-group col-12">
@@ -34,13 +36,17 @@
       <select class="form-control" id="campus" name="campus" placeholder="Selecione seu campus aqui">
         <option value =""></option>
         @foreach ($Campus as $Campus)
+          <option selected value = "{{$Profile->campus}}">{{$Profile->campus}}</option>
+          @if ($Profile->campus == $Campus->name)
+          @continue
+          @endif
           <option value = "{{$Campus->name}}">{{$Campus->name}}</option>
         @endforeach
       </select>
     </div>
     <div class="form-group col-12">
       <label for="title">Descreva um pouco sobre você:</label>
-      <textarea name="description" id="description" class="form-control" placeholder="Insira uma descrição sobre você"></textarea>
+      <textarea name="description" id="description" class="form-control" placeholder="Insira uma descrição sobre você">{{$Profile->description}}</textarea>
     </div>
     <!-- Botão para acionar modal -->
     <div class="col-12  text-right">
@@ -76,7 +82,7 @@
       </select>
     </div>
     <div class="form-group col-12 text-right">
-      <input type="submit" class="btn btn-primary" value="Finalizar perfil">
+      <input type="submit" class="btn btn-primary" value="Atualizar perfil">
     </div>
   </form>
 </div>

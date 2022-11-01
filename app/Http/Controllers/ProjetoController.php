@@ -85,7 +85,6 @@ class ProjetoController extends Controller
         ['Projeto' => $Projeto, 
         'SelectedTags'=> $SelectedTags,
         'Campus' => $Campus,
-        // 'SelectedCampus' =>$SelectedCampus,
         'Tags'=> $Tags]);
     }
 

@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasFactory;
-    
-    public function tags()
-    {
-        return $this->belongstoMany(Tag::class);
-    }
+
+    protected $casts = [ 
+        'tags' => 'array'
+    ];
+
+    protected $dates = ['date'];
+
+    protected $guarded = [];
     
     public function campus()
     {
@@ -23,4 +26,5 @@ class Profile extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
 }
