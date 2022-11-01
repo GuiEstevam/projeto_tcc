@@ -51,8 +51,8 @@ header {
   width: 275px;
 }
 /* navbar */
-#navbar img {
-  width: 46px;
+/* #navbar img {
+  width: 60px;
 }
 
 #navbar {
@@ -71,7 +71,7 @@ header {
 }
 .navbar-toggle .icon-bar {
   background-color: #fff;
-}
+} */
 
 /* Search Container */
 #search-container {
@@ -257,9 +257,67 @@ header {
   margin-top: 20px;
 }
 
+.profile-photo-preview {
+  width: 120px;
+  height: 120px;
+  margin-top: 20px;
+  border-radius: 50%;
+}
 /* Create profile page */
 .experienceControl ion-icon {
   font-size: 20px;
+}
+
+/* Show profile page */
+
+#profile-info-container h1 {
+  font-size: 34px;
+  font-weight: 900;
+  margin-top: 30px;
+}
+#profile-info-container{
+  font-size: 34px;
+  font-weight: 900;
+}
+
+#profile-info-container p {
+  margin: 0;
+  font-size: 20px;
+  display: flex;
+  font-weight: 500;
+}
+
+#profile-info-container h3,
+#description-container h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top:10px;
+}
+
+#profile-info-container ion-icon {
+  font-size: 26px;
+  color: #87BA3F;
+  margin-right: 5px;
+}
+
+#profile-info-container #event-submit {
+  margin: 20px 0;
+}
+
+#profile-description-container {
+  font-size: 20px;
+  margin-top: 30px;
+}
+
+#profile-tags-list{
+  list-style:none;
+  padding-left:0;
+}
+
+#profile-tags-list li{
+  display:flex;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 /* footer */

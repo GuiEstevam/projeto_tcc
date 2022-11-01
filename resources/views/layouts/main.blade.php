@@ -17,11 +17,53 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
         <!-- CSS da aplicação -->
         <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="/css/navbar.css">
         <script src="/js/scripts.js"></script>
     </head>
     <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-light">
+      <nav class="navbar">
+        <div class="navbar-container container">
+            <input type="checkbox" name="" id="">
+            <div class="hamburger-lines">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
+            </div>
+            <ul class="menu-items">
+              @auth<li>
+                <a href="/profile/show/{{Auth::user()->id}}">{{Auth::user()->name}}</a></li>
+                <li><a href="/">Conversas</a></li>
+                @if (Auth::user()->role_id == 1)
+                  <li><a href="/tags/listagem">Tags</a></li>
+                  <li><a href="/campus/listagem">Campus</a></li>
+                @endif
+                <li><a href="/projetos/create">Tenho um projeto</a></li>
+              @endauth
+              <li>
+                <form action="/logout" method="POST">
+                  @csrf
+                  <a href="/logout" 
+                    onclick="event.preventDefault();
+                    this.closest('form').submit();">
+                    Sair
+                  </a>
+                </form>
+              </li>
+              @guest
+                  <li>
+                    <a href="/register" class="nav-link">Cadastrar</a>
+                  </li>
+                  <li>
+                    <a href="/login" class="nav-link">Login</a>
+                  </li>
+              @endguest
+            </ul>
+            <h1 class="logo"><img src="/img/logo.png" alt="Projeto_TCC"></h1>
+        </div>
+    </nav>
+      
+        {{-- <nav class="navbar navbar-expand-md navbar-light">
           <div class="collapse navbar-collapse" id="navbar">
             <a href="/" class="navbar-brand">
               <img src="/img/logo.png" alt="Projeto_TCC">
@@ -29,7 +71,7 @@
             <ul class="navbar-nav">
               @auth
               <li class="nav-item">
-                  <a href="/dashboard" class="nav-link">{{Auth::user()->name}}</a>
+                  <a href="/profile/show/{{Auth::user()->id}}" class="nav-link">{{Auth::user()->name}}</a>
               </li>
               @endauth
               <li class="nav-item">
@@ -75,7 +117,7 @@
                 @endauth
             </ul>
           </div>
-        </nav>
+        </nav> --}}
       </header>
         <main>
           <div class="container-fluid">
