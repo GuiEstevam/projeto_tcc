@@ -1,9 +1,4 @@
-/* ///////////..utility classes../////////// */
-
-/* ............/navbar/............ *
-
 /* desktop mode............/// */
-
 .navbar input[type="checkbox"],
 .navbar .hamburger-lines {
   display: none;
@@ -13,11 +8,11 @@
   justify-content: space-between;
   background-color: #FFF;
   box-shadow: 0px 5px 10px 0px #aaa;
-  position: block;
+  position: relative;
   width: 100%;
   color: #000;
   opacity: 0.85;
-  height: 70px;
+  height: 80px;
   z-index: 12;
 }
 
@@ -27,10 +22,9 @@
 
 .navbar-container {
   display: flex;
-  justify-content: space-between;
-  height: 64px;
-  align-items: center;
+  height: 100%;
   padding-top:0.5rem ;
+  padding-bottom:0.5rem ;
 }
 
 .menu-items {
@@ -44,14 +38,11 @@
 
 .menu-items li {
   list-style: none;
-  padding-right: 1.5rem;
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
 }
 
 .menu-items a {
   text-decoration: none;
-  font-size: 16px;
+  font-size: 1.0rem;
   color: #757575;
   transition: color 0.3s ease-in-out;
 }
@@ -169,51 +160,9 @@
     transform: rotate(-35deg);
   }
 
-  /* ......./ food /......... */
-
-  .food-container {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .food-type:not(:last-child) {
-    margin-bottom: 3rem;
-  }
-
-  .food-type {
-    box-shadow: 5px 5px 10px 0 #aaa;
-  }
-
 }
 
 @media (max-width: 500px) {
-  html {
-    font-size: 65%;
-  }
-
-  .navbar .menu-items li{
-      font-size: 1.6rem;
-  }
-
-  .testimonial-container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-
-  .food-menu-item {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .form-container {
-    width: 90%;
-  }
-
-  .contact-container {
-    display: flex;
-    flex-direction: column;
-  }
 
   .logo {
     position: absolute;
@@ -224,7 +173,6 @@
 
   .navbar .menu-items li {
     margin-bottom: 2.5rem;
-    font-size: 1.8rem;
     font-weight: 500;
   }
 }

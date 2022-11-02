@@ -31,38 +31,43 @@
                 <span class="line line3"></span>
             </div>
             <ul class="menu-items">
-              @auth<li>
-                <a href="/profile/show/{{Auth::user()->id}}">{{Auth::user()->name}}</a></li>
-                <li><a href="/">Conversas</a></li>
-                @if (Auth::user()->role_id == 1)
-                  <li><a href="/tags/listagem">Tags</a></li>
-                  <li><a href="/campus/listagem">Campus</a></li>
-                @endif
-                <li><a href="/projetos/create">Tenho um projeto</a></li>
-              @endauth
+              @auth
               <li>
-                <form action="/logout" method="POST">
-                  @csrf
-                  <a href="/logout" 
-                    onclick="event.preventDefault();
-                    this.closest('form').submit();">
-                    Sair
-                  </a>
-                </form>
+                <a href="/profile/show/{{Auth::user()->id}}">{{Auth::user()->name}}</a>
               </li>
+              <li>
+                <a href="/">Conversas</a>
+              </li>
+              @if (Auth::user()->role_id == 1)
+                <li><a href="/tags/listagem">Tags</a></li>
+                <li><a href="/campus/listagem">Campus</a></li>
+              @endif
+                <li>
+                  <a href="/projetos/create">Tenho um projeto</a>
+                </li>
+                <li>
+                  <form action="/logout" method="POST">
+                    @csrf
+                    <a href="/logout" 
+                      onclick="event.preventDefault();
+                      this.closest('form').submit();">
+                      Sair
+                    </a>
+                  </form>
+                </li>
+              @endauth
               @guest
-                  <li>
-                    <a href="/register" class="nav-link">Cadastrar</a>
-                  </li>
-                  <li>
-                    <a href="/login" class="nav-link">Login</a>
-                  </li>
+                <li>
+                  <a href="/register" class="nav-link">Cadastrar</a>
+                </li>
+                <li>
+                  <a href="/login" class="nav-link">Login</a>
+                </li>
               @endguest
             </ul>
             <h1 class="logo"><img src="/img/logo.png" alt="Projeto_TCC"></h1>
         </div>
     </nav>
-      
         {{-- <nav class="navbar navbar-expand-md navbar-light">
           <div class="collapse navbar-collapse" id="navbar">
             <a href="/" class="navbar-brand">
