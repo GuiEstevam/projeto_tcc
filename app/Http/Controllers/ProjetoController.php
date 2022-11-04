@@ -61,7 +61,11 @@ class ProjetoController extends Controller
     public function destroy($id)
     {
         $Projeto = Projeto::findOrFail($id);
-        
+        $user = auth()->user();
+
+        if ($user->id != $Projeto->user_id) {
+            return redirect('/dashboard')->with('msg','Você não é o proprietário deste projeto');
+        }
         $Projeto->tags()->detach();
         $Projeto->campus()->detach();
 
@@ -79,7 +83,7 @@ class ProjetoController extends Controller
         $SelectedTags = $Projeto->tags()->where('projeto_id', $id)->get();
 
         if ($user->id != $Projeto->user_id) {
-            return redirect('/dashboard');
+            return redirect('/dashboard')->with('msg','Você não é o proprietário deste projeto');
         }
         return view('projetos.edit', 
         ['Projeto' => $Projeto, 
@@ -147,8 +151,6 @@ class ProjetoController extends Controller
         $user = auth()->user();
         $Projeto = $user->projetos;
         $projetosAsParticipant = $user->projetosAsParticipant;
-        error_log('Some message here.');
-
 
         return view(
             'projetos.dashboard',
@@ -214,7 +216,7 @@ class ProjetoController extends Controller
         where p.owner_id = ? and p.projeto_id = ? and p.situacao = 1',
             [$user_id, $id]
         );
-
+        
         return view(
             'projetos.participantes',
             [

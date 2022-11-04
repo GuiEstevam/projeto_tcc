@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth;
 use App\Models\Campus;
@@ -16,6 +17,10 @@ class ProfileController extends Controller
     {
         $user = User::findOrFail($id);
         $profile = $user->profile;
+        if (empty($profile)){
+            return redirect()->route('dashboard');
+        }
+        
         $experiences = $user->experience;
         return view('profile.show', 
         ['Experiences' => $experiences,
@@ -34,12 +39,17 @@ class ProfileController extends Controller
     public function create()
     {
         $User = Auth()->user();
+
+        if (!empty($User->profile)){
+            return redirect()->route('dashboard');
+        }
         $Tag = Tag::all();
         $Campus = Campus::all();
         $Experiences = $User->experience;
 
         return view('profile.createProfile', 
-        ['Campus'=>$Campus,
+        [
+        'Campus'=>$Campus,
         'Experiences' => $Experiences, 
         'Tag' => $Tag, 
         'User'=> $User]);
@@ -71,11 +81,10 @@ class ProfileController extends Controller
     public function edit($id)
     {
         $User = Auth()->user();
-        $Profile = $User->profile;
+        $Profile = Profile::findOrFail($id);
         $Tag = Tag::all();
         $Campus = Campus::all();
         $Experiences = $User->experience;
-        $Profile = Profile::findOrFail($id);
 
         if ($User->id != $Profile->user_id) {
             return redirect('/dashboard');
