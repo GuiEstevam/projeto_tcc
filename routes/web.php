@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Events\Message;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +19,8 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\CampusController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ChatController;
+
 
 // Projetos
 Route::get('/', [ProjetoController::class, 'index']);
@@ -57,3 +61,7 @@ Route::get('/profile/setAdministrator',[ProfileController::class,'setAdministrat
 // Experience
 Route::post('/profile/createExperience',[ExperienceController::class,'storeExperience'])->middleware('auth');
 Route::get('/profile/delete/{id}', [ExperienceController::class, 'destroy'])->middleware('auth');
+
+Route::get('/chat',[ChatController::class, 'index']);
+
+Route::post('/send-message',[ChatController::class, 'sendMessage']);

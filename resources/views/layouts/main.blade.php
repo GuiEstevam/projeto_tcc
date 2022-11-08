@@ -16,6 +16,7 @@
       <link rel="stylesheet" href="/css/styles.css">
       <link rel="stylesheet" href="/css/navbar.css">
       <script src="/js/scripts.js"></script>
+      
   </head>
   <body>
     <header>
@@ -82,7 +83,6 @@
       <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     </body>
 </html>
