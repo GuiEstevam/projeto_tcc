@@ -10,10 +10,12 @@
             </div>
             <div id="profile-info-container" class="col-md-8">
                 @if ($User->id == $Profile->id)
-                    <div class="edit-profile-button col-12 text-right">
-                        <a class="btn btn-primary" href="/profile/edit/{{ $Profile->id }}">
-                            Editar perfil
-                        </a>
+                    <div class="row"> 
+                        <div class="edit-profile-button text-right">
+                            <a class="btn btn-primary" href="/profile/edit/{{ $Profile->id }}">
+                                Editar perfil
+                            </a>
+                        </div>
                     </div>
                 @endif
                 <h1>{{ $User->name }}</h1>
