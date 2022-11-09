@@ -26,7 +26,7 @@ Route::post('/projetos', [ProjetoController::class, 'store'])->middleware('auth'
 Route::get('/projetos/edit/{id}', [ProjetoController::class, 'edit'])->middleware('auth');
 Route::put('/projetos/update/{id}', [ProjetoController::class, 'update'])->middleware('auth');
 Route::delete('/projetos/{id}', [ProjetoController::class, 'destroy'])->middleware('auth');
-Route::get('/dashboard', [ProjetoController::class, 'dashboard'])->middleware('auth');
+Route::get('/dashboard', [ProjetoController::class, 'dashboard'])->middleware('auth')->name('dashboard');
 Route::get('/projetos/join/{id}', [ProjetoController::class, 'joinProject'])->middleware('auth');
 Route::delete('/projetos/leave/{id}', [ProjetoController::class, 'leaveProject'])->middleware('auth');
 Route::get('/projetos/participantes/{id}', [ProjetoController::class, 'participantes'])->middleware('auth');
