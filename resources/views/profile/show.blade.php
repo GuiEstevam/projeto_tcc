@@ -10,8 +10,8 @@
             </div>
             <div id="profile-info-container" class="col-md-8">
                 @if ($User->id == $Profile->id)
-                    <div class="col-12 text-right">
-                        <a class="btn btn-primary text-right" href="/profile/edit/{{ $Profile->id }}">
+                    <div class="edit-profile-button col-12 text-right">
+                        <a class="btn btn-primary" href="/profile/edit/{{ $Profile->id }}">
                             Editar perfil
                         </a>
                     </div>
@@ -36,11 +36,18 @@
                         </li>
                     @endforeach
                 </ul>
-                <p>
-                    <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#modalExperience">
-                        Experiências anteriores
-                    </a>
-                </p>
+                <div class="buttons-container">
+                    <p>
+                        <a class="btn btn-primary col-8" href="#" data-toggle="modal" data-target="#modalExperience">
+                            Experiências anteriores
+                        </a>
+                    </p>
+                    <p>
+                        <a class="btn btn-primary col-8 mt-2" href="#">
+                            Solicitar orientação
+                        </a>
+                    </p>
+                </div>
             </div>
             <div class="col-md-12" id="description-container">
                 <h3>Sobre mim:</h3>

@@ -320,6 +320,10 @@ header {
   font-weight: 400;
 }
 
+#edit-profile-button{
+  padding-right:0px !important;
+} 
+
 /* footer */
 footer {
   text-align: center;
