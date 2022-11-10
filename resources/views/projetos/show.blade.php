@@ -12,9 +12,7 @@
                 <h1>{{ $Projeto->name }}</h1>
                 <p class="event-city">
                     <ion-icon name="location-outline"></ion-icon>
-                    @foreach ($Campus as $Campus)
-                        {{ $Campus->name }}
-                    @endforeach
+                        {{ $Projeto->campus }}
                 </p>
                 <p class="events-participants">
                     <ion-icon name="people-outline"></ion-icon> {{ count($Projeto->users) }} Alunos
@@ -22,12 +20,13 @@
                 <p class="event-owner"><a href="/profile/show/{{ $ProjectOwner['id'] }}">
                         <ion-icon name="star-outline"></ion-icon> Orientador: {{ $ProjectOwner['name'] }}
                     </a></p>
-                <p class="event-tags">
-                    <ion-icon name="grid-outline"></ion-icon>
-                    @foreach ($Tags as $Tags)
-                        {{ $Tags->name }}
-                    @endforeach
-                </p>
+                    <ul id="profile-tags-list">
+                        @foreach ($Projeto->tags as $item)
+                            <li>
+                                <ion-icon name="play-outline"></ion-icon>{{ $item }}
+                            </li>
+                        @endforeach
+                    </ul>
                 @if ($ProjectOwner['id'] == $user->id)
                     <p class="already-joined-msg"> Você é o responsável deste projeto!</p>
                 @elseif(!$hasUserJoined && !$hasUserApproved)

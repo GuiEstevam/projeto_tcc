@@ -20,7 +20,7 @@
                 <select class="form-control" id="campus" name="campus" placeholder="Campus onde será realizado">
                     <option value=""></option>
                     @foreach ($Campus as $Campus)
-                        <option value="{{ $Campus->id }}">{{ $Campus->name }}</option>
+                        <option value="{{ $Campus->name }}">{{ $Campus->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -32,7 +32,7 @@
                 <label for="title">Tags:</label>
                 <select class=" form-control" multiple data-live-search="true" title="Selecione as TAGS" name="tags[]">
                     @foreach ($Tag as $Tag)
-                        <option value="{{ $Tag->id }}">{{ $Tag->name }}</option>
+                        <option value="{{ $Tag->name }}">{{ $Tag->name}}</option>
                     @endforeach
                 </select>
             </div>

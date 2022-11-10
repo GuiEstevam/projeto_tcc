@@ -40,8 +40,11 @@
                         <li class="ml-2">
                             <a href="/">Conversas</a>
                         </li>
+                        <li class="ml-2">
+                            <a href="/dashboard">Dashboard</a>
+                        </li>
                         @if (Auth::user()->role_id == 1)
-                            <li><a href="/tags/listagem">Tags</a></li>
+                            <li class="ml-2"><a href="/tags/listagem">Tags</a></li>
                             <li class="ml-2"><a href="/campus/listagem">Campus</a></li>
                         @endif
                         <li class="ml-2">
