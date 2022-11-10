@@ -11,6 +11,10 @@ class Projeto extends Model
 
     protected $dates = ['date'];
 
+    protected $casts = [ 
+        'tags' => 'array'
+    ];
+
     protected $guarded = [];
 
     public function user()
