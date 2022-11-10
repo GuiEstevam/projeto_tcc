@@ -35,9 +35,7 @@ class ProjetoController extends Controller
         $Projeto->name = $request->name;
         $Projeto->campus = $request->campus;
         $Projeto->description = $request->description;
-
-        $tags = $request->tags;
-        $campus = $request->campus;
+        $Projeto->tags = $request->tags;
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $requestImage = $request->image;
@@ -51,11 +49,11 @@ class ProjetoController extends Controller
         $Projeto->user_id = $user->id;
         $Projeto->save();
 
-        $Projeto->campus()->attach($campus,['projeto_id'=> $Projeto->id]);
+        // $Projeto->campus()->attach($campus,['projeto_id'=> $Projeto->id]);
 
-        foreach($tags as $tags){
-            $Projeto->tags()->attach($tags,['projeto_id'=> $Projeto->id]);
-        }
+        // foreach($tags as $tags){
+        //     $Projeto->tags()->attach($tags,['projeto_id'=> $Projeto->id]);
+        // }
         return redirect('/')->with('msg', 'Projeto criado com sucesso!');
     }
     public function destroy($id)

@@ -16,8 +16,8 @@ class CreateProfileTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->string('graduation');
-            $table->integer('semester');
+            $table->string('graduation')->nullable();
+            $table->integer('semester')->nullable();
             $table->text('description');
             $table->boolean('disponibility')->default(0);
             $table->integer('user_id')->constrained();

@@ -10,11 +10,13 @@ use App\Models\Projeto;
 use App\Models\Profile;
 use App\Models\Tag;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class ProfileController extends Controller
 {
     public function show($id)
     {
+        $logged = Auth()->user();
         $user = User::findOrFail($id);
         $profile = $user->profile;
         if (empty($profile)){
@@ -24,6 +26,7 @@ class ProfileController extends Controller
         $experiences = $user->experience;
         return view('profile.show', 
         ['Experiences' => $experiences,
+        'Logged' => $logged,
         'Profile' => $profile,
         'User' => $user, 
         ]);

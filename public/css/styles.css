@@ -1,337 +1,315 @@
 /* General */
 * {
-  font-family: 'Inter',sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
 body {
-  min-height: 100vh;
-  padding-bottom: 100px;
-  position: relative;
+    min-height: 100vh;
+    padding-bottom: 100px;
+    position: relative;
 }
 
 header {
-  background-color: #FFF;
-  border-bottom: 1px solid #CCC;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
 }
 
 .row {
-  margin: 0;
+    margin: 0;
 }
 
 .container-fluid {
-  padding: 0;
+    padding: 0;
 }
 
 .btn-primary {
-  background-color: #87BA3F;
-  border: 2px solid #87BA3F;
+    background-color: #87ba3f;
+    border: 2px solid #87ba3f;
 }
 
 .btn-primary:hover {
-  background-color: #71C837;
-  border-color: #71C837;
+    background-color: #71c837;
+    border-color: #71c837;
 }
 
 .msg {
-  background-color: #D4EDDA;
-  color: #155724;
-  border: 2px solid #C3E6CB;
-  width: 100%;
-  margin-bottom: 0;
-  text-align: center;
-  padding: 10px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 2px solid #c3e6cb;
+    width: 100%;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 10px;
 }
 
-#info-container .already-joined-msg{
-  margin:15px 0;
-  color:#004085;
-  background-color: #CCE5FF;
-  border: 1px solid #B8DAFF;
-  padding: 10px;
-  width: 275px;
+#info-container .already-joined-msg {
+    margin: 15px 0;
+    color: #004085;
+    background-color: #cce5ff;
+    border: 1px solid #b8daff;
+    padding: 10px;
+    width: 275px;
 }
-/* navbar */
-/* #navbar img {
-  width: 60px;
-}
-
-#navbar {
-  justify-content: space-between;
-  background-color: #FFF;
-  padding: 3px 0;
-}
-
-#navbar a {
-  font-size: 16px;
-  color: #757575;
-}
-
-#navbar a:hover {
-  color: #A5D77F;
-}
-.navbar-toggle .icon-bar {
-  background-color: #fff;
-} */
 
 /* Search Container */
 #search-container {
-  background-image: url("../img/banner.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 400px;
-  padding: 50px;
-  text-align: center;
+    background-image: url("../img/banner.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    padding: 50px;
+    text-align: center;
 }
 
 #search-container h1 {
-  color: #A5D77F;
-  margin-bottom: 30px;
-  font-weight: 900;
+    color: #a5d77f;
+    margin-bottom: 30px;
+    font-weight: 900;
 }
 
 #search-container form {
-  width: 50%;
-  margin: 0 auto;
+    width: 50%;
+    margin: 0 auto;
 }
 
 /* Projects list */
 #events-container {
-  padding: 50px;
+    padding: 50px;
 }
 
 #events-container h2 {
-  margin-bottom: 10px;
-  font-weight: bold
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
 #events-container .subtitle {
-  color: #757575;
-  margin-bottom: 30px;
+    color: #757575;
+    margin-bottom: 30px;
 }
 
 #cards-container {
-  display: flex;
+    display: flex;
 }
 
 #events-container .card {
-  flex: 1 1 1 24%;
-  border-radius: 10px;
-  padding: 0;
-  margin: .5%;
+    flex: 1 1 1 24%;
+    border-radius: 10px;
+    padding: 0;
+    margin: 0.5%;
 }
 
 #events-container img {
-  height: 150px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+    height: 150px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .card .card-date {
-  font-size: 12px;
-  color: #CCC;
+    font-size: 12px;
+    color: #ccc;
 }
 
 .card .card-title {
-  color: #212121;
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 30px;
+    color: #212121;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
 }
 
 .card-participants {
-  font-size: 14px;
-  color: #757575;
+    font-size: 14px;
+    color: #757575;
 }
 
 /* Event create page */
 #event-create-container {
-  padding: 30px
+    padding: 30px;
 }
 
 #event-create-container label {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 #event-create-container input,
 #event-create-container select,
 #event-create-container textarea {
-  font-size: 12px;
+    font-size: 12px;
 }
 
-#event-create-container h4{
-  font-size: 34px;
-  font-weight: 800;
-  text-align: center;
+#event-create-container h4 {
+    font-size: 34px;
+    font-weight: 800;
+    text-align: center;
 }
 
 /* Project page */
 #image-container,
 #info-container {
-  margin-top: 30px;
+    margin-top: 30px;
 }
 
 #image-container img {
-  border-radius: 10px;
+    border-radius: 10px;
 }
 
 #info-container h1 {
-  font-size: 34px;
-  font-weight: 900;
+    font-size: 34px;
+    font-weight: 900;
 }
 
 #info-container p {
-  margin: 0;
-  font-size: 17px;
-  display: flex;
+    margin: 0;
+    font-size: 17px;
+    display: flex;
 }
 
 #info-container h3,
 #description-container h3 {
-  font-size: 20px;
-  font-weight: bold;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 #info-container ion-icon {
-  font-size: 20px;
-  color: #87BA3F;
-  margin-right: 5px;
+    font-size: 20px;
+    color: #87ba3f;
+    margin-right: 5px;
 }
 
 #info-container #event-submit {
-  margin: 20px 0;
+    margin: 20px 0;
 }
 
 #description-container {
-  font-size: 20px;
-  margin-top: 30px;
+    font-size: 20px;
+    margin-top: 30px;
 }
 
 #selectpicker {
-  border: 1px !important; 
+    border: 1px !important;
 }
 
 /* Dashboard */
 .administrator-buttom {
-  margin-bottom: 30px;
-  margin-top: 30px;
+    margin-bottom: 30px;
+    margin-top: 30px;
 }
 .dashboard-title-container {
-  margin-bottom: 30px;
-  margin-top: 30px;
+    margin-bottom: 30px;
+    margin-top: 30px;
 }
-.dashboard-title-container h1{
-  font-weight: 900;
-  
+.dashboard-title-container h1 {
+    font-weight: 900;
 }
-.dashboard-title-container h2{
-  font-weight: 900;
-  
+.dashboard-title-container h2 {
+    font-weight: 900;
 }
 
 .dashboard-events-container th {
-  width: 25%;
+    width: 25%;
 }
 
 .bootstrap-select .btn {
-  border-top: none;
-  border-bottom: none;
-  border-right: none;
-  font-weight: 200;
-  padding: 12px 12px 22px 12px;
-  font-size: 16px;
-  margin-bottom: 10px;
-
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    font-weight: 200;
+    padding: 12px 12px 22px 12px;
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 .bootstrap-select .dropdown-menu {
-  margin: 2px 0 0;
+    margin: 2px 0 0;
 }
 
 .dashboard-events-container form {
-  display: inline-block;
+    display: inline-block;
 }
 
 /* Edit page */
 
 .img-preview {
-  width: 100px;
-  margin-top: 20px;
+    width: 100px;
+    margin-top: 20px;
 }
 
 .profile-photo-preview {
-  width: 120px;
-  height: 120px;
-  margin-top: 20px;
-  border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    margin-top: 20px;
+    border-radius: 50%;
 }
 /* Create profile page */
 .experienceControl ion-icon {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 /* Show profile page */
 
 #profile-info-container h1 {
-  font-size: 34px;
-  font-weight: 900;
-  margin-top: 30px;
+    font-size: 34px;
+    font-weight: 900;
+    margin-top: 30px;
 }
-#profile-info-container{
-  font-size: 34px;
-  font-weight: 900;
+#profile-info-container {
+    font-size: 34px;
+    font-weight: 900;
 }
 
 #profile-info-container p {
-  margin: 0;
-  font-size: 20px;
-  display: flex;
-  font-weight: 500;
+    margin: 0;
+    font-size: 20px;
+    display: flex;
+    font-weight: 500;
 }
 
 #profile-info-container h3,
 #description-container h3 {
-  font-size: 20px;
-  font-weight: bold;
-  margin-top:10px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 #profile-info-container ion-icon {
-  font-size: 26px;
-  color: #87BA3F;
-  margin-right: 5px;
+    font-size: 26px;
+    color: #87ba3f;
+    margin-right: 5px;
 }
 
 #profile-info-container #event-submit {
-  margin: 20px 0;
+    margin: 20px 0;
 }
 
 #profile-description-container {
-  font-size: 20px;
-  margin-top: 30px;
+    font-size: 20px;
+    margin-top: 30px;
 }
 
-#profile-tags-list{
-  list-style:none;
-  padding-left:0;
+#profile-tags-list {
+    list-style: none;
+    padding-left: 0;
 }
 
-#profile-tags-list li{
-  display:flex;
-  font-size: 20px;
-  font-weight: 400;
+#profile-tags-list li {
+    display: flex;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+#edit-profile-button {
+    padding-left: 0px !important;
 }
 
 /* footer */
 footer {
-  text-align: center;
-  background-color: #353E48;
-  color: #FFF;
-  padding: 30px;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+    text-align: center;
+    background-color: #353e48;
+    color: #fff;
+    padding: 30px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 footer p {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
-

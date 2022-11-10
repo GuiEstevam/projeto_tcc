@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjetoTagTable extends Migration
+class AddTagColumnToProjetosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateProjetoTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('projeto_tag', function (Blueprint $table) {
-            $table->foreignId('tag_id')->constrained();
-            $table->foreignId('projeto_id')->constrained();
-            $table->id('id_projeto_tag');
-            $table->timestamps();
+        Schema::table('projetos', function (Blueprint $table) {
+            $table->json('tags')
+            ->nullable()
+            ->after('description');
         });
     }
 
@@ -28,6 +27,8 @@ class CreateProjetoTagTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projeto_tag');
+        Schema::table('projetos', function (Blueprint $table) {
+            $table->dropColumn('tags');
+        });
     }
 }
