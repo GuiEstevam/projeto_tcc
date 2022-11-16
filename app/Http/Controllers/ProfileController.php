@@ -19,6 +19,7 @@ class ProfileController extends Controller
         $logged = Auth()->user();
         $user = User::findOrFail($id);
         $profile = $user->profile;
+        $loggedProjects = $logged->projetos;
         if (empty($profile)){
             return redirect()->route('dashboard');
         }
@@ -27,6 +28,7 @@ class ProfileController extends Controller
         return view('profile.show', 
         ['Experiences' => $experiences,
         'Logged' => $logged,
+        'LoggedProjects' => $loggedProjects,
         'Profile' => $profile,
         'User' => $user, 
         ]);
@@ -124,4 +126,13 @@ class ProfileController extends Controller
 
         return back()->with('msg', 'Perfil editado com sucesso!');
     }
+
+    public function request(Request $request){
+        $user = User::findOrFail($request->requestedUser);
+        $logged = Auth()->user();
+        $user->projetosAsParticipant()->attach($request->projectRequest, 
+        ['owner_id' => $logged->user_id,
+         'type' => 1]);
+         return back()->with('msg', 'Sua solicitação foi enviax da para o projeto: ' . $user->name);
+    } 
 }

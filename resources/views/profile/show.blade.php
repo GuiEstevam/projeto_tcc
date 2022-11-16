@@ -50,14 +50,16 @@
             </a>
           </p>
           <p>
-            @if ($User->role_id == 2)
-              <a class="btn btn-primary col-8 mt-2" href="#">
-                Solicitar orientação
-              </a>
-            @else
-              <a class="btn btn-primary col-8 mt-2" href="#">
-                Oferecer orientação
-              </a>
+            @if ($Logged->id != $User->id)
+              @if ($User->role_id == 3)
+                <a class="btn btn-primary col-8 mt-2" href="#" data-toggle="modal" data-target="#modalRequest">
+                  Solicitar orientação
+                </a>
+              @elseif($User->role_id == 2)
+                <a class="btn btn-primary col-8 mt-2" href="#" data-toggle="modal" data-target="#modalRequest">
+                  Oferecer orientação
+                </a>
+              @endif
             @endif
           </p>
         </div>
@@ -68,12 +70,13 @@
       </div>
     </div>
   </div>
+  {{-- Modal para visualização das experiências anteriores --}}
   <div class="modal fade" id="modalExperience" tabindex="-1" role="dialog" aria-labelledby="modalExperience"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="ExperienceModalLabel">Adicionar nova formação</h5>
+          <h5 class="modal-title" id="ExperienceModalLabel">Experiências anteriores</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -89,6 +92,43 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalRequest" tabindex="-1" role="dialog" aria-labelledby="modalRequest"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="RequestModalLabel">Adicionar nova formação</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group col-12">
+            <label for="title">Solicitando para:</label>
+            <input type="text" class="form-control" id="requestedUser" name="requestedUser"
+              value={{$User->id}}>
+          </div>
+          <form form action="/profile/request" method="POST" enctype="multipart/form-data">
+            @csrf
+            @foreach ($LoggedProjects as $LoggedProject)
+              <div class="form-group col-12">
+                <label for="title">Selecione um projeto:</label>
+                <select class="form-control" id="projectRequestId" name="projectRequest">
+                  <option value="" disabled></option>
+                  <option value="{{ $LoggedProject->id }}">{{ $LoggedProject->name }}</option>
+                </select>
+              </div>
+            @endforeach
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-primary">Solicitar</button>
         </div>
         </form>
       </div>

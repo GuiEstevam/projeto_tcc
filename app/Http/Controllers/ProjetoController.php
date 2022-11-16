@@ -181,13 +181,7 @@ class ProjetoController extends Controller
 
         return redirect('/dashboard')->with('msg', 'Voce não faz mais parte do projeto:' . $Projeto->name);
     }
-
-    public function main_layout()
-    {
-        $user = auth()->user();
-        return view('layouts.main', ['nomedousuario' => $user]);
-    }
-
+    
     public function participantes($id)
     {
         $user_id = auth()->user()->id;
