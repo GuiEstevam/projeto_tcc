@@ -65,3 +65,6 @@ Route::get('/profile/delete/{id}', [ExperienceController::class, 'destroy'])->mi
 Route::get('/chat',[ChatController::class, 'index']);
 
 Route::post('/send-message',[ChatController::class, 'sendMessage']);
+
+Route::resource('groups', 'GroupController');
+Route::resource('conversations', 'ConversationController');
