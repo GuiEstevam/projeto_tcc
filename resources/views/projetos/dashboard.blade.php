@@ -93,7 +93,7 @@
   <div class="col-md-10 offset-md-1 dashboard-events-container">
     @if (count($projetosAsParticipant) > 0)
       @foreach ($projetosAsParticipant as $Projetos)
-        @if ($Projetos->pivot->type == 1 and $Projetos->pivot->type == 0)
+        @if ($Projetos->pivot->type == 1 and $Projetos->pivot->situacao == 0)
           <table class="table">
             <thead>
               <tr>

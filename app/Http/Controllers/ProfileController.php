@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Auth as FacadesAuth;
 class ProfileController extends Controller
 {
     public function show($id)
-    {
+    {   
+        $hasUserJoined = false;
+        $hasUserApproved = false;
         $logged = Auth()->user();
         $user = User::findOrFail($id);
         $profile = $user->profile;
@@ -25,14 +27,35 @@ class ProfileController extends Controller
             return redirect()->route('dashboard');
         }
         
+        if ($logged) {
+            $userProjects = $user->projetosAsParticipant->toArray();
+
+            foreach ($userProjects as $userProject) {
+                if ($userProject['pivot']['user_id'] == $id) {
+                    $hasUserJoined = true;
+                    if ($userProject['pivot']['situacao'] == 1) {
+                        $hasUserApproved = true;
+                    }
+                }
+            }
+        }
+
         $experiences = $user->experience;
         return view('profile.show', 
-        ['Experiences' => $experiences,
-        'Logged' => $logged,
-        'LoggedProjects' => $loggedProjects,
-        'Profile' => $profile,
-        'User' => $user, 
+        [
+            'userProjects' => $userProjects,
+            'hasUserApproved' => $hasUserApproved,
+            'hasUserJoined' => $hasUserJoined,
+            'Experiences' => $experiences,
+            'Logged' => $logged,
+            'LoggedProjects' => $loggedProjects,
+            'Profile' => $profile,
+            'User' => $user, 
         ]);
+
+        
+
+
     }
     
     public function setAdministrator(){
@@ -134,13 +157,13 @@ class ProfileController extends Controller
         $user->projetosAsParticipant()->attach($request->projectRequest, 
         ['owner_id' => $logged->id,
          'type' => 1]);
-         return back()->with('msg', 'Sua solicitação foi enviax da para o projeto: ' . $user->name);
+         return back()->with('msg', 'Sua solicitação foi enviada para: ' . $user->name);
     }
     
     public function requestAccept($id){
         $user = auth()->user();
 
         DB::update('update projeto_user set situacao = "1" where user_id = ? and projeto_id = ?', [$user->id, $id]);
-        return back()->with('msg', 'O aluno agora é participante do projeto');
+        return back()->with('msg', 'Você agora é participante do projeto!');
     }
 }

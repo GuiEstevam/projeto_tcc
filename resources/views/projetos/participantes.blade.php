@@ -22,7 +22,7 @@
               <td class="text-center">{{ $pendentes->name }}</td>
               <td class="text-center">{{ $pendentes->situacao }}</td>
               <td class="text-center">
-                <a href="/projetos/request/aceitar/{{ $pendentes->user_id }}" class="btn btn-primary">Aceitar</a>
+                <a href="/projetos/participantes/aceitar/{{ $pendentes->user_id }}" class="btn btn-primary">Aceitar</a>
                 <a href="/projetos/participantes/recusar/{{ $pendentes->user_id }}"
                   class="btn btn-danger delete-btn">Recusar</a>
               </td>

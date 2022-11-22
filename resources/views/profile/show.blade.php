@@ -50,16 +50,15 @@
             </a>
           </p>
           <p>
-            @if ($Logged->id != $User->id)
-              @if ($User->role_id == 3)
-                <a class="btn btn-primary col-8 mt-2" href="#" data-toggle="modal" data-target="#modalRequest">
-                  Solicitar orientação
-                </a>
-              @elseif($User->role_id == 2)
-                <a class="btn btn-primary col-8 mt-2" href="#" data-toggle="modal" data-target="#modalRequest">
-                  Oferecer orientação
-                </a>
-              @endif
+            @if ($Logged->id == $User->id)
+            @elseif(!$hasUserJoined && !$hasUserApproved)
+              <a class="btn btn-primary col-8 mt-2" href="#" data-toggle="modal" data-target="#modalRequest">
+                Solicitar participação
+              </a>
+            @elseif($hasUserJoined && $hasUserApproved)
+              <p class="already-joined-msg col-8"> Esse usuário já faz parte do seu projeto</p>
+            @else
+              <p class="already-joined-msg col-8"> Você já solicitou a participação deste usuário</p>
             @endif
           </p>
         </div>
@@ -111,11 +110,11 @@
         <div class="modal-body">
           <form form action="/profile/request" method="POST" enctype="multipart/form-data">
             @csrf
-          <div class="form-group col-12">
-            <label for="title">Solicitando para:</label>
-            <input type="text" class="form-control" id="requestedUser" name="requestedUser"
-              value={{$User->id}}>
-          </div>
+            <div class="form-group col-12">
+              <label for="title">Solicitando para:</label>
+              <input type="text" class="form-control" id="requestedUser" name="requestedUser"
+                value={{ $User->id }}>
+            </div>
             @foreach ($LoggedProjects as $LoggedProject)
               <div class="form-group col-12">
                 <label for="title">Selecione um projeto:</label>
