@@ -54,6 +54,7 @@ Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->middle
 Route::get('/profile/show/{id}', [ProfileController::class, 'show'])->middleware('auth');
 Route::get('/profile/setAdministrator', [ProfileController::class, 'setAdministrator'])->middleware('auth');
 Route::post('/profile/request', [ProfileController::class, 'request'])->middleware('auth');
+Route::get('/profile/request/accept/{id}', [ProfileController::class, 'requestAccept'])->middleware('auth');
 
 // Experience
 Route::post('/profile/createExperience', [ExperienceController::class, 'storeExperience'])->middleware('auth');

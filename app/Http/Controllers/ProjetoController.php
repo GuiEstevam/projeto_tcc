@@ -193,7 +193,7 @@ class ProjetoController extends Controller
         from projeto_user p
         join users u
         on p.user_id = u.id
-        where p.owner_id = ? and p.projeto_id = ? and p.situacao = 0 ',
+        where p.owner_id = ? and p.projeto_id = ? and p.situacao = 0 and p.type = 0 ',
             [$user_id, $id]
         );
 

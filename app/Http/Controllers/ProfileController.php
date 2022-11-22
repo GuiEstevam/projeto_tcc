@@ -10,6 +10,7 @@ use App\Models\Projeto;
 use App\Models\Profile;
 use App\Models\Tag;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class ProfileController extends Controller
@@ -129,10 +130,17 @@ class ProfileController extends Controller
 
     public function request(Request $request){
         $user = User::findOrFail($request->requestedUser);
-        $logged = Auth()->user();
+        $logged = auth()->user();
         $user->projetosAsParticipant()->attach($request->projectRequest, 
-        ['owner_id' => $logged->user_id,
+        ['owner_id' => $logged->id,
          'type' => 1]);
          return back()->with('msg', 'Sua solicitação foi enviax da para o projeto: ' . $user->name);
-    } 
+    }
+    
+    public function requestAccept($id){
+        $user = auth()->user();
+
+        DB::update('update projeto_user set situacao = "1" where user_id = ? and projeto_id = ?', [$user->id, $id]);
+        return back()->with('msg', 'O aluno agora é participante do projeto');
+    }
 }

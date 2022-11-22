@@ -72,7 +72,7 @@ class User extends Authenticatable
 
     public function projetosAsParticipant()
     {
-        return $this->belongsToMany('App\Models\Projeto')->withPivot('situacao');
+        return $this->belongsToMany('App\Models\Projeto')->withPivot('situacao', 'type');
     }
 
     public function experience()

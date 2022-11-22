@@ -19,7 +19,7 @@ class Projeto extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User')->withPivot('situacao');
+        return $this->belongsTo('App\Models\User')->withPivot('situacao', 'type');
     }
 
     public function users()

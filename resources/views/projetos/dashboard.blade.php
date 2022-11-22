@@ -51,16 +51,16 @@
   </div>
   <div class="col-md-10 offset-md-1 dashboard-events-container">
     @if (count($projetosAsParticipant) > 0)
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Nome</th>
-            <th scope="col">Participantes</th>
-            <th scope="col">Ações</th>
-          </tr>
-        </thead>
-        @foreach ($projetosAsParticipant as $Projetos)
-          @if ($Projetos->pivot->situacao == 1)
+      @foreach ($projetosAsParticipant as $Projetos)
+        @if ($Projetos->pivot->situacao == 1)
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Participantes</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
             <tbody>
               <tr>
                 <td><a href="/projetos/{{ $Projetos->id }}">{{ $Projetos->name }}</a></td>
@@ -79,12 +79,45 @@
               </tr>
             @else
               <p> Há solicitações aguardando aprovação, você será notificado!</a></p>
-          @endif
-        @endforeach
-        </tbody>
+        @endif
+      @endforeach
+      </tbody>
       </table>
     @else
       <p>Voce ainda não está cadastrado em nenhum projeto, <a href="/">Veja os projetos disponíveis</a></p>
+    @endif
+  </div>
+  <div class="col-md-10 offset-md-1 dashboard-title-container">
+    <h1>SOLICITAÇÕES FEITAS A MIM:</h1>
+  </div>
+  <div class="col-md-10 offset-md-1 dashboard-events-container">
+    @if (count($projetosAsParticipant) > 0)
+      @foreach ($projetosAsParticipant as $Projetos)
+        @if ($Projetos->pivot->type == 1 and $Projetos->pivot->type == 0)
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Participantes</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="/projetos/{{ $Projetos->id }}">{{ $Projetos->name }}</a></td>
+                <td>{{ count($Projetos->users) }}</td>
+                <td>
+                  <a href="/profile/request/accept/{{ $Projetos->id }}" class="btn btn-primary">Aceitar</a>
+                  <a href="/projetos/participantes/recusar/{{ $Projetos->id }}"
+                    class="btn btn-danger delete-btn">Recusar</a>
+                </td>
+              </tr>
+            @else
+        @endif
+      @endforeach
+      </tbody>
+      </table>
+    @else
     @endif
   </div>
 @endsection

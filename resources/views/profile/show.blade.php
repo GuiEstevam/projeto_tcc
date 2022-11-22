@@ -103,19 +103,19 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="RequestModalLabel">Adicionar nova formação</h5>
+          <h5 class="modal-title" id="RequestModalLabel">Solicitando para:</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
+          <form form action="/profile/request" method="POST" enctype="multipart/form-data">
+            @csrf
           <div class="form-group col-12">
             <label for="title">Solicitando para:</label>
             <input type="text" class="form-control" id="requestedUser" name="requestedUser"
               value={{$User->id}}>
           </div>
-          <form form action="/profile/request" method="POST" enctype="multipart/form-data">
-            @csrf
             @foreach ($LoggedProjects as $LoggedProject)
               <div class="form-group col-12">
                 <label for="title">Selecione um projeto:</label>
