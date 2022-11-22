@@ -51,15 +51,17 @@ Route::delete('/campus/{id}', [CampusController::class, 'destroy'])->middleware(
 
 //Profile 
 
-Route::get('/profile/createProfile',[ProfileController::class,'create']);
+Route::get('/profile/createProfile', [ProfileController::class, 'create']);
 Route::post('/profile', [ProfileController::class, 'store'])->middleware('auth');
 Route::get('/profile/edit/{id}', [ProfileController::class, 'edit'])->middleware('auth');
 Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->middleware('auth');
-Route::get('/profile/show/{id}',[ProfileController::class,'show'])->middleware('auth');
-Route::get('/profile/setAdministrator',[ProfileController::class,'setAdministrator'])->middleware('auth');
+Route::get('/profile/show/{id}', [ProfileController::class, 'show'])->middleware('auth');
+Route::get('/profile/setAdministrator', [ProfileController::class, 'setAdministrator'])->middleware('auth');
+Route::post('/profile/request', [ProfileController::class, 'request'])->middleware('auth');
+Route::get('/profile/request/accept/{id}', [ProfileController::class, 'requestAccept'])->middleware('auth');
 
 // Experience
-Route::post('/profile/createExperience',[ExperienceController::class,'storeExperience'])->middleware('auth');
+Route::post('/profile/createExperience', [ExperienceController::class, 'storeExperience'])->middleware('auth');
 Route::get('/profile/delete/{id}', [ExperienceController::class, 'destroy'])->middleware('auth');
 
 Route::get('/chat',[ChatController::class, 'index']);

@@ -132,13 +132,10 @@ class ProjetoController extends Controller
                 }
             }
         }
-        $Tags = $Projeto->tags()->where('projeto_id', $Projeto->id)->get();
-        $Campus = $Projeto->campus()->where('projeto_id', $Projeto->id)->get();
-
         $ProjectOwner = User::where('id', $Projeto->user_id)->first()->toArray();
 
         return view('projetos.show', 
-        ['Campus' =>$Campus,'Tags'=> $Tags,'hasUserApproved' => $hasUserApproved, 
+        ['hasUserApproved' => $hasUserApproved, 
         'Projeto' => $Projeto, 'ProjectOwner' => $ProjectOwner, 
         'hasUserJoined' => $hasUserJoined, 'user' => $user]);
     }
@@ -181,13 +178,7 @@ class ProjetoController extends Controller
 
         return redirect('/dashboard')->with('msg', 'Voce não faz mais parte do projeto:' . $Projeto->name);
     }
-
-    public function main_layout()
-    {
-        $user = auth()->user();
-        return view('layouts.main', ['nomedousuario' => $user]);
-    }
-
+    
     public function participantes($id)
     {
         $user_id = auth()->user()->id;
@@ -199,7 +190,7 @@ class ProjetoController extends Controller
         from projeto_user p
         join users u
         on p.user_id = u.id
-        where p.owner_id = ? and p.projeto_id = ? and p.situacao = 0 ',
+        where p.owner_id = ? and p.projeto_id = ? and p.situacao = 0 and p.type = 0 ',
             [$user_id, $id]
         );
 
@@ -238,7 +229,7 @@ class ProjetoController extends Controller
 
         DB::update('update projeto_user set situacao = "1" where user_id =?', [$id]);
 
-        return back()->with('msg', 'O aluno ' . $nome . ' agora é participante do projeto');
+        return back()->with('msg', $nome . ' agora é participante do projeto');
     }
 
     public function recusar($id)
@@ -257,6 +248,6 @@ class ProjetoController extends Controller
 
         DB::update('delete from projeto_user where user_id = ?', [$id]);
 
-        return back()->with('msg', 'A partipação do aluno ' . $nome . ' foi recusada');
+        return back()->with('msg', $nome . ' não faz mais parte do projeto');
     }
 }
