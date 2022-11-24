@@ -19,7 +19,7 @@ use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\ProfileController;
 
 // Projetos
-Route::get('/', [ProjetoController::class, 'index']);
+// Route::get('/', [ProjetoController::class, 'index']);
 Route::get('/projetos/create', [ProjetoController::class, 'create'])->middleware('auth');
 Route::get('/projetos/{id}', [ProjetoController::class, 'show']);
 Route::post('/projetos', [ProjetoController::class, 'store'])->middleware('auth');
@@ -59,3 +59,10 @@ Route::get('/profile/request/accept/{id}', [ProfileController::class, 'requestAc
 // Experience
 Route::post('/profile/createExperience', [ExperienceController::class, 'storeExperience'])->middleware('auth');
 Route::get('/profile/delete/{id}', [ExperienceController::class, 'destroy'])->middleware('auth');
+
+
+//Chat
+
+Route::get('/', ChatsController::class,'index');
+Route::get('messages', 'ChatsController@fetchMessages');
+Route::post('messages', 'ChatsController@sendMessage');
