@@ -16,6 +16,7 @@ use App\Http\Controllers\ProjetoController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CampusController;
 use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 
 // Projetos
@@ -59,3 +60,5 @@ Route::get('/profile/request/accept/{id}', [ProfileController::class, 'requestAc
 // Experience
 Route::post('/profile/createExperience', [ExperienceController::class, 'storeExperience'])->middleware('auth');
 Route::get('/profile/delete/{id}', [ExperienceController::class, 'destroy'])->middleware('auth');
+
+Route::get('/chat/{id}', [MessageController::class,'index'])->middleware('auth');

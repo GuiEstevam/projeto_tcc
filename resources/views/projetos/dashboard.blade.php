@@ -66,7 +66,7 @@
                 <td><a href="/projetos/{{ $Projetos->id }}">{{ $Projetos->name }}</a></td>
                 <td>{{ count($Projetos->users) }}</td>
                 <td>
-                  <a href="" class="btn btn-primary">Chat</a>
+                  <a href="/chat/{{ $Projetos->id }}" class="btn btn-primary">Chat</a>
                   <form action="/projetos/leave/{{ $Projetos->id }}" method="POST">
                     @csrf
                     @method('DELETE')

@@ -36,4 +36,9 @@ class Projeto extends Model
     {
         return $this->belongstoMany('App\Models\Campus');
     }
+
+    public function message()
+    {
+        return $this->hasMany('App\Models\Message');
+    }
 }
