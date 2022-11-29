@@ -62,3 +62,9 @@ Route::post('/profile/createExperience', [ExperienceController::class, 'storeExp
 Route::get('/profile/delete/{id}', [ExperienceController::class, 'destroy'])->middleware('auth');
 
 Route::get('/chat/{id}', [MessageController::class,'index'])->middleware('auth');
+Route::post('/message', [MessageController::class, 'store'])->middleware('auth');
+
+
+// Download
+
+Route::get('download/{id}',[ProjetoController::class, 'download'])->middleware('auth');

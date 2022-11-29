@@ -28,6 +28,7 @@
               <td class="text-center"><a href="/projetos/{{ $Projetos->id }}">{{ $Projetos->name }}</a></td>
               <td class="text-center">{{ count($Projetos->users) }}</td>
               <td>
+                <a href="/chat/{{ $Projetos->id }}" class="btn btn-primary mt-2">Chat</a>
                 <a href="/projetos/participantes/{{ $Projetos->id }}" class="btn btn-primary mt-2 ">Partipantes</a>
                 <a href="/projetos/edit/{{ $Projetos->id }}" class="btn btn-primary mt-2 ml-1">Editar</a>
                 <form action="/projetos/{{ $Projetos->id }}" method="POST">

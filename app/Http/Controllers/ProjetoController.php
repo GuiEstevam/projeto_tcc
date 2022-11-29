@@ -64,8 +64,6 @@ class ProjetoController extends Controller
         if ($user->id != $Projeto->user_id) {
             return redirect('/dashboard')->with('msg','Você não é o proprietário deste projeto');
         }
-        $Projeto->tags()->detach();
-        $Projeto->campus()->detach();
 
         $Projeto->delete();
 
@@ -78,38 +76,37 @@ class ProjetoController extends Controller
         $Tags = Tag::all();
         $user = auth()->user();
         $Projeto = Projeto::findOrFail($id);
-        $SelectedTags = $Projeto->tags()->where('projeto_id', $id)->get();
 
         if ($user->id != $Projeto->user_id) {
             return redirect('/dashboard')->with('msg','Você não é o proprietário deste projeto');
         }
         return view('projetos.edit', 
         ['Projeto' => $Projeto, 
-        'SelectedTags'=> $SelectedTags,
         'Campus' => $Campus,
         'Tags'=> $Tags]);
     }
 
     public function update(Request $request)
     {
-        $Projeto = Projeto::findOrFail($request->id);
 
-        $Projeto->update([
-            'name' => $request->name,
-            'description'=>$request->description,
-    ]);
-        $campus = $request->campus;
+        $data = $request->all();
 
-        $Projeto->campus()->detach();
+        if($request->hasFile('profile_photo_path') && $request->file('profile_photo_path')->isValid()) {
 
-        $Projeto->campus()->attach($campus,['projeto_id'=> $Projeto->id]);
+            $requestImage = $request->profile_photo_path;
 
-        $tags = $request->tags;
-        $Projeto->tags()->detach();
+            $extension = $requestImage->extension();
 
-    foreach($tags as $tags){
-        $Projeto->tags()->attach($tags,['projeto_id'=> $request->id]);
-    }
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $requestImage->move(public_path('img/profile_photo'), $imageName);
+
+            $data['profile_photo_path'] = $imageName;
+
+        }
+
+        Projeto::findOrFail($request->id)->update($data);
+
         return redirect('/')->with('msg', 'Projeto editado com sucesso!');
     }
     public function show($id)
@@ -249,5 +246,9 @@ class ProjetoController extends Controller
         DB::update('delete from projeto_user where user_id = ?', [$id]);
 
         return back()->with('msg', $nome . ' não faz mais parte do projeto');
+    }
+
+    public function download($id){
+        return response()->download(storage_path().'\project\files\\'.$id);
     }
 }

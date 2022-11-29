@@ -9,9 +9,11 @@ class Message extends Model
 {
     use HasFactory;
 
+    public $timestamps = true;
+
     public function projetos()
     {
-        return $this->belongsTo('App\Models\Projeto');
+        return $this->belongsTo(Projeto::class);
     }
 
     public function user()

@@ -16,18 +16,23 @@ class MessageController extends Controller
      */
     public function index($id)
     {
+        $user = auth()->user();
+
         $projeto = Projeto::findOrFail($id);
 
-        $messages = $projeto->message->toArray();
+        $messages = $projeto->message;
 
-        
-        $messageOwner = User::where('id', $messages['user_id'])->first()->toArray();
+        $messageOwner = $messages;
 
-        return view('chat.show', 
-        ['projetos' => $projeto, 
-        'messages' => $messages,
-        'messageOwner' => $messageOwner
-        ]);
+        return view(
+            'chat.show',
+            [
+                'user' => $user,
+                'projeto' => $projeto,
+                'messages' => $messages,
+                'messageOwner' => $messageOwner
+            ]
+        );
     }
 
     /**
@@ -37,7 +42,6 @@ class MessageController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -48,7 +52,24 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = new Message;
+        $user = auth()->user();
+
+        $message->content = $request->content;
+        $message->user_id = $user->id;
+        $message->projeto_id = $request->projeto_id;
+
+        if ($request->hasFile('file') && $request->file('file')->isValid()) {
+            $requestFile = $request->file;
+            $extension = $requestFile->extension();
+            $imageName = $requestFile->getClientOriginalName() . strtotime("now") . "." . $extension;
+            $requestFile->move(storage_path('project/files'), $imageName);
+            $message->file = $imageName;
+        }
+
+        $message->save();
+
+        return back();
     }
 
     /**

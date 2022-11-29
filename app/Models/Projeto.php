@@ -19,12 +19,12 @@ class Projeto extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User')->withPivot('situacao', 'type');
+        return $this->belongsTo(User::class)->withPivot('situacao', 'type');
     }
 
     public function users()
     {
-        return $this->belongsToMany('App\Models\User');
+        return $this->belongsToMany(User::class);
     }
 
     public function tags()
@@ -39,6 +39,6 @@ class Projeto extends Model
 
     public function message()
     {
-        return $this->hasMany('App\Models\Message');
+        return $this->hasMany(Message::class);
     }
 }

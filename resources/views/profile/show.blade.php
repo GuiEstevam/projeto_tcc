@@ -110,11 +110,8 @@
         <div class="modal-body">
           <form form action="/profile/request" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="form-group col-12">
-              <label for="title">Solicitando para:</label>
-              <input type="text" class="form-control" id="requestedUser" name="requestedUser"
+              <input type="hidden" class="form-control" id="requestedUser" name="requestedUser"
                 value={{ $User->id }}>
-            </div>
             @foreach ($LoggedProjects as $LoggedProject)
               <div class="form-group col-12">
                 <label for="title">Selecione um projeto:</label>
