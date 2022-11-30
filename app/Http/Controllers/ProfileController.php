@@ -16,17 +16,17 @@ use Illuminate\Support\Facades\Auth as FacadesAuth;
 class ProfileController extends Controller
 {
     public function show($id)
-    {   
+    {
         $hasUserJoined = false;
         $hasUserApproved = false;
         $logged = Auth()->user();
         $user = User::findOrFail($id);
         $profile = $user->profile;
         $loggedProjects = $logged->projetos;
-        if (empty($profile)){
+        if (empty($profile)) {
             return redirect()->route('dashboard');
         }
-        
+
         if ($logged) {
             $userProjects = $user->projetosAsParticipant->toArray();
 
@@ -41,50 +41,52 @@ class ProfileController extends Controller
         }
 
         $experiences = $user->experience;
-        return view('profile.show', 
-        [
-            'userProjects' => $userProjects,
-            'hasUserApproved' => $hasUserApproved,
-            'hasUserJoined' => $hasUserJoined,
-            'Experiences' => $experiences,
-            'Logged' => $logged,
-            'LoggedProjects' => $loggedProjects,
-            'Profile' => $profile,
-            'User' => $user, 
-        ]);
-
-        
-
-
+        return view(
+            'profile.show',
+            [
+                'userProjects' => $userProjects,
+                'hasUserApproved' => $hasUserApproved,
+                'hasUserJoined' => $hasUserJoined,
+                'Experiences' => $experiences,
+                'Logged' => $logged,
+                'LoggedProjects' => $loggedProjects,
+                'Profile' => $profile,
+                'User' => $user,
+            ]
+        );
     }
-    
-    public function setAdministrator(){
+
+    public function setAdministrator()
+    {
         $user = Auth()->user();
         $user->role_id = 1;
         $user->save();
         return redirect('/dashboard')->with('msg', 'Parabéns! Agora você é administrador do sistema');
-
     }
     public function create()
     {
         $User = Auth()->user();
 
-        if (!empty($User->profile)){
+        if (!empty($User->profile)) {
             return redirect()->route('dashboard');
         }
         $Tag = Tag::all();
         $Campus = Campus::all();
         $Experiences = $User->experience;
 
-        return view('profile.createProfile', 
-        [
-        'Campus'=>$Campus,
-        'Experiences' => $Experiences, 
-        'Tag' => $Tag, 
-        'User'=> $User]);
+        return view(
+            'profile.createProfile',
+            [
+                'Campus' => $Campus,
+                'Experiences' => $Experiences,
+                'Tag' => $Tag,
+                'User' => $User
+            ]
+        );
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $Profile = new Profile;
 
         $Profile->graduation = $request->graduation;
@@ -92,7 +94,7 @@ class ProfileController extends Controller
         $Profile->description = $request->description;
         $Profile->campus = $request->campus;
         $Profile->tags = $request->tags;
-        
+
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $requestImage = $request->image;
             $extension = $requestImage->extension();
@@ -118,13 +120,16 @@ class ProfileController extends Controller
         if ($User->id != $Profile->user_id) {
             return redirect('/dashboard');
         }
-        return view('profile.edit',
-        [
-        'Campus' => $Campus,
-        'Experiences'=> $Experiences,
-        'Profile' => $Profile, 
-        'Tag'=> $Tag,
-        'User' => $User]);
+        return view(
+            'profile.edit',
+            [
+                'Campus' => $Campus,
+                'Experiences' => $Experiences,
+                'Profile' => $Profile,
+                'Tag' => $Tag,
+                'User' => $User
+            ]
+        );
     }
 
     public function update(Request $request)
@@ -132,7 +137,7 @@ class ProfileController extends Controller
         $data = $request->all();
 
         // Image Upload
-        if($request->hasFile('profile_photo_path') && $request->file('profile_photo_path')->isValid()) {
+        if ($request->hasFile('profile_photo_path') && $request->file('profile_photo_path')->isValid()) {
 
             $requestImage = $request->profile_photo_path;
 
@@ -143,7 +148,6 @@ class ProfileController extends Controller
             $requestImage->move(public_path('img/profile_photo'), $imageName);
 
             $data['profile_photo_path'] = $imageName;
-
         }
 
         Profile::findOrFail($request->id)->update($data);
@@ -151,16 +155,22 @@ class ProfileController extends Controller
         return back()->with('msg', 'Perfil editado com sucesso!');
     }
 
-    public function request(Request $request){
+    public function request(Request $request)
+    {
         $user = User::findOrFail($request->requestedUser);
         $logged = auth()->user();
-        $user->projetosAsParticipant()->attach($request->projectRequest, 
-        ['owner_id' => $logged->id,
-         'type' => 1]);
-         return back()->with('msg', 'Sua solicitação foi enviada para: ' . $user->name);
+        $user->projetosAsParticipant()->attach(
+            $request->projectRequest,
+            [
+                'owner_id' => $logged->id,
+                'type' => 1
+            ]
+        );
+        return back()->with('msg', 'Sua solicitação foi enviada para: ' . $user->name);
     }
-    
-    public function requestAccept($id){
+
+    public function requestAccept($id)
+    {
         $user = auth()->user();
 
         DB::update('update projeto_user set situacao = "1" where user_id = ? and projeto_id = ?', [$user->id, $id]);

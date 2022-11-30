@@ -7,47 +7,46 @@
 {{-- @dd($Tag) --}}
 @extends('layouts.main')
 
-@section('title', 'Editar seu cadastro')
+@section('title', 'Editando: '.$Projeto->name)
 
 @section('content')
-    <div id="event-create-container" class="col-md-6 offset-md-3">
-        <h1>Editar seu cadastro </h1>
-        <form action="/projetos/update/{{ $Projeto->id }}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="form-group">
-                <label for="image">Imagem do Projeto:</label>
-                <input type="file" id="image" name="image" class="from-control-file">
-                <img src="/img/projects/{{ $Projeto->image }}" alt="{{ $Projeto->name }}" class="img-preview">
-            </div>
-            <div class="form-group">
-                <label for="title">Nome:</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Nome do orientador"
-                    value="{{ $Projeto->name }}">
-            </div>
-            <div class="form-group">
-                <label for="title">Campus</label>
-                <select class="form-control" id="campus" name="campus" placeholder="Campus onde será realizado">
-                    @foreach ($Campus as $Campus)
-                        <option value="{{ $Campus->id }}">{{ $Campus->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="title">Descreva o seu projeto:</label>
-                <textarea name="description" id="description" class="form-control" placeholder="Descrição do projeto"> {{ $Projeto->description }} </textarea>
-            </div>
-            <div class="form-group">
-                <label for="title">Tags:</label>
-                <select class="form-control col-12" multiple data-live-search="true" title="Selecione as TAGS"
-                    name="tags[]">
-                    @foreach ($Tags as $Tags)
-                        <option value="{{ $Tags->id }}">{{ $Tags->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <input type="submit" class="btn btn-primary" value="Editar Projeto">
-        </form>
-    </div>
+  <div id="event-create-container" class="col-md-6 offset-md-3">
+    <h4>Editando: {{$Projeto->name}} </h4>
+    <form action="/projetos/update/{{ $Projeto->id }}" method="POST">
+      @csrf
+      @method('PUT')
+      <div class="form-group">
+        <label for="image">Imagem do Projeto:</label>
+        <input type="file" id="image" name="image" class="form-control">
+        <img src="/img/projects/{{ $Projeto->image }}" alt="{{ $Projeto->name }}" class="img-preview">
+      </div>
+      <div class="form-group">
+        <label for="title">Nome:</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Nome do orientador"
+          value="{{ $Projeto->name }}">
+      </div>
+      <div class="form-group">
+        <label for="title">Campus</label>
+        <select class="form-control" id="campus" name="campus" placeholder="Campus onde será realizado">
+          @foreach ($Campus as $Campus)
+            <option value="{{ $Campus->name }}">{{ $Campus->name }}</option>
+          @endforeach
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="title">Descreva o seu projeto:</label>
+        <textarea name="description" id="description" class="form-control" placeholder="Descrição do projeto"> {{ $Projeto->description }} </textarea>
+      </div>
+      <div class="form-group">
+        <label for="title">Tags:</label>
+        <select class="form-control col-12" multiple data-live-search="true" title="Selecione as TAGS" name="tags[]">
+          @foreach ($Tags as $Tags)
+            <option value="{{ $Tags->name }}">{{ $Tags->name }}</option>
+          @endforeach
+        </select>
+      </div>
+      <input type="submit" class="btn btn-primary" value="Editar Projeto">
+    </form>
+  </div>
 
 @endsection

@@ -3,12 +3,9 @@
 @section('title', 'Dashboard')
 
 @section('content')
-
-  @if (count($Users) == 1 && $User->role_id != 1)
-    <a href="/profile/setAdministrator/" class="col-md-10 offset-md-1 mt-3 administrator-button btn btn-primary">
-      Tornar Administrador
-    </a>
-  @endif
+  <div class="col-md-10 offset-md-1 mt-3 text-right">
+    <a href="/projetos/create" class="btn btn-primary">Tenho um projeto</a>
+  </div>
   <div class="col-md-10 offset-md-1 dashboard-title-container">
     <h1>MEUS PROJETOS</h1>
   </div>
@@ -30,7 +27,7 @@
               <td>
                 <a href="/chat/{{ $Projetos->id }}" class="btn btn-primary mt-2">Chat</a>
                 <a href="/projetos/participantes/{{ $Projetos->id }}" class="btn btn-primary mt-2 ">Partipantes</a>
-                <a href="/projetos/edit/{{ $Projetos->id }}" class="btn btn-primary mt-2 ml-1">Editar</a>
+                <a href="/projetos/edit/{{ $Projetos->id }}" class="btn btn-primary mt-2">Editar</a>
                 <form action="/projetos/{{ $Projetos->id }}" method="POST">
                   @csrf
                   @method('DELETE')
@@ -79,7 +76,7 @@
                 </td>
               </tr>
             @else
-              <p> Há solicitações aguardando aprovação, você será notificado!</a></p>
+              <p> Há solicitações aguardando aprovação, você será notificado!</p>
         @endif
       @endforeach
       </tbody>

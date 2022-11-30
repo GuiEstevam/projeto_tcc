@@ -25,7 +25,7 @@ class ProjetoController extends Controller
     {
         $Tag = Tag::all();
         $Campus = Campus::all();
-        return view('projetos.create', ['Tag' => $Tag, 'Campus'=>$Campus]);
+        return view('projetos.create', ['Tag' => $Tag, 'Campus' => $Campus]);
     }
 
     public function store(Request $request)
@@ -62,7 +62,7 @@ class ProjetoController extends Controller
         $user = auth()->user();
 
         if ($user->id != $Projeto->user_id) {
-            return redirect('/dashboard')->with('msg','Você não é o proprietário deste projeto');
+            return redirect('/dashboard')->with('msg', 'Você não é o proprietário deste projeto');
         }
 
         $Projeto->delete();
@@ -78,12 +78,16 @@ class ProjetoController extends Controller
         $Projeto = Projeto::findOrFail($id);
 
         if ($user->id != $Projeto->user_id) {
-            return redirect('/dashboard')->with('msg','Você não é o proprietário deste projeto');
+            return redirect('/dashboard')->with('msg', 'Você não é o proprietário deste projeto');
         }
-        return view('projetos.edit', 
-        ['Projeto' => $Projeto, 
-        'Campus' => $Campus,
-        'Tags'=> $Tags]);
+        return view(
+            'projetos.edit',
+            [
+                'Projeto' => $Projeto,
+                'Campus' => $Campus,
+                'Tags' => $Tags
+            ]
+        );
     }
 
     public function update(Request $request)
@@ -91,23 +95,22 @@ class ProjetoController extends Controller
 
         $data = $request->all();
 
-        if($request->hasFile('profile_photo_path') && $request->file('profile_photo_path')->isValid()) {
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
 
-            $requestImage = $request->profile_photo_path;
+            $requestImage = $request->image;
 
             $extension = $requestImage->extension();
 
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
 
-            $requestImage->move(public_path('img/profile_photo'), $imageName);
+            $requestImage->move(public_path('img/projects'), $imageName);
 
-            $data['profile_photo_path'] = $imageName;
-
+            $data['image'] = $imageName;
         }
 
         Projeto::findOrFail($request->id)->update($data);
 
-        return redirect('/')->with('msg', 'Projeto editado com sucesso!');
+        return redirect('/dashboard')->with('msg', 'Projeto editado com sucesso!');
     }
     public function show($id)
     {
@@ -131,10 +134,14 @@ class ProjetoController extends Controller
         }
         $ProjectOwner = User::where('id', $Projeto->user_id)->first()->toArray();
 
-        return view('projetos.show', 
-        ['hasUserApproved' => $hasUserApproved, 
-        'Projeto' => $Projeto, 'ProjectOwner' => $ProjectOwner, 
-        'hasUserJoined' => $hasUserJoined, 'user' => $user]);
+        return view(
+            'projetos.show',
+            [
+                'hasUserApproved' => $hasUserApproved,
+                'Projeto' => $Projeto, 'ProjectOwner' => $ProjectOwner,
+                'hasUserJoined' => $hasUserJoined, 'user' => $user
+            ]
+        );
     }
 
     public function dashboard()
@@ -146,10 +153,12 @@ class ProjetoController extends Controller
 
         return view(
             'projetos.dashboard',
-            ['Projetos' => $Projeto, 
-            'projetosAsParticipant' => $projetosAsParticipant,
-            'Users' => $Users,
-            'User' => $user]
+            [
+                'Projetos' => $Projeto,
+                'projetosAsParticipant' => $projetosAsParticipant,
+                'Users' => $Users,
+                'User' => $user
+            ]
         );
     }
 
@@ -160,7 +169,7 @@ class ProjetoController extends Controller
         $Projeto = Projeto::findOrFail($id);
 
         $user->projetosAsParticipant()->attach($id, ['owner_id' => $Projeto->user_id]);
-        
+
 
         return back()->with('msg', 'Sua solicitação foi enviada para o projeto: ' . $Projeto->name);
     }
@@ -175,7 +184,7 @@ class ProjetoController extends Controller
 
         return redirect('/dashboard')->with('msg', 'Voce não faz mais parte do projeto:' . $Projeto->name);
     }
-    
+
     public function participantes($id)
     {
         $user_id = auth()->user()->id;
@@ -202,7 +211,7 @@ class ProjetoController extends Controller
         where p.owner_id = ? and p.projeto_id = ? and p.situacao = 1',
             [$user_id, $id]
         );
-        
+
         return view(
             'projetos.participantes',
             [
@@ -248,7 +257,8 @@ class ProjetoController extends Controller
         return back()->with('msg', $nome . ' não faz mais parte do projeto');
     }
 
-    public function download($id){
-        return response()->download(storage_path().'\project\files\\'.$id);
+    public function download($id)
+    {
+        return response()->download(storage_path() . '\project\files\\' . $id);
     }
 }

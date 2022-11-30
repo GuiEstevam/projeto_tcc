@@ -45,9 +45,6 @@
               <li class="ml-2"><a href="/campus/listagem">CAMPUS</a></li>
             @endif
             <li class="ml-2">
-              <a href="/projetos/create">TENHO UM PROJETO</a>
-            </li>
-            <li class="ml-2">
               <form action="/logout" method="POST">
                 @csrf
                 <a href="/logout" onclick="event.preventDefault();
