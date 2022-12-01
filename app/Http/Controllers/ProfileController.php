@@ -136,17 +136,12 @@ class ProfileController extends Controller
     {
         $data = $request->all();
 
-        // Image Upload
         if ($request->hasFile('profile_photo_path') && $request->file('profile_photo_path')->isValid()) {
 
             $requestImage = $request->profile_photo_path;
-
             $extension = $requestImage->extension();
-
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-
             $requestImage->move(public_path('img/profile_photo'), $imageName);
-
             $data['profile_photo_path'] = $imageName;
         }
 
@@ -176,4 +171,11 @@ class ProfileController extends Controller
         DB::update('update projeto_user set situacao = "1" where user_id = ? and projeto_id = ?', [$user->id, $id]);
         return back()->with('msg', 'Você agora é participante do projeto!');
     }
+
+    public function requestDeny($id){    
+        DB::update('delete from projeto_user where user_id = ? and situacao = 0 and type = 1', [$id]);
+
+        return back()->with('msg', 'Você recusou a participação ao projeto');
+    }
+
 }

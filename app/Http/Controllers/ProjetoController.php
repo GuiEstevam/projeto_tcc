@@ -241,7 +241,6 @@ class ProjetoController extends Controller
     public function recusar($id)
     {
 
-
         $aluno = DB::select('select u.name
         from users u
         join projeto_user pu

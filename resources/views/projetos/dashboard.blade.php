@@ -106,8 +106,7 @@
                 <td>{{ count($Projetos->users) }}</td>
                 <td>
                   <a href="/profile/request/accept/{{ $Projetos->id }}" class="btn btn-primary">Aceitar</a>
-                  <a href="/projetos/participantes/recusar/{{ $Projetos->id }}"
-                    class="btn btn-danger delete-btn">Recusar</a>
+                  <a href="/profile/request/deny/{{ $User->id }}" class="btn btn-danger delete-btn">Recusar</a>
                 </td>
               </tr>
             @else

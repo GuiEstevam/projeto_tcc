@@ -12,17 +12,17 @@
 @section('content')
   <div id="event-create-container" class="col-md-6 offset-md-3">
     <h4>Editando: {{$Projeto->name}} </h4>
-    <form action="/projetos/update/{{ $Projeto->id }}" method="POST">
+    <form action="/projetos/update/{{ $Projeto->id }}" method="POST" enctype="multipart/form-data">
       @csrf
       @method('PUT')
-      <div class="form-group">
-        <label for="image">Imagem do Projeto:</label>
+      <div class="form-group col-12">
+        <label for="profile_photo_path">Coloque uma imagem de perfil:</label>
         <input type="file" id="image" name="image" class="form-control">
-        <img src="/img/projects/{{ $Projeto->image }}" alt="{{ $Projeto->name }}" class="img-preview">
+        <img src="/img/projects/{{ $Projeto->image }}" alt="{{ $Projeto->name }}" class="profile-photo-preview">
       </div>
       <div class="form-group">
         <label for="title">Nome:</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Nome do orientador"
+        <input type="text" class="form-control" id="name" name="name" placeholder="Nome do projeto"
           value="{{ $Projeto->name }}">
       </div>
       <div class="form-group">

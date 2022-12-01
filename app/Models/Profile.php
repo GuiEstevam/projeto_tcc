@@ -9,14 +9,14 @@ class Profile extends Model
 {
     use HasFactory;
 
-    protected $casts = [ 
+    protected $casts = [
         'tags' => 'array'
     ];
 
     protected $dates = ['date'];
 
     protected $guarded = [];
-    
+
     public function campus()
     {
         return $this->belongstoMany(Campus::class);
@@ -26,5 +26,4 @@ class Profile extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
 }

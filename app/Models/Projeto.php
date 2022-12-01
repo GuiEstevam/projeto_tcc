@@ -11,7 +11,7 @@ class Projeto extends Model
 
     protected $dates = ['date'];
 
-    protected $casts = [ 
+    protected $casts = [
         'tags' => 'array'
     ];
 
@@ -29,12 +29,12 @@ class Projeto extends Model
 
     public function tags()
     {
-        return $this->belongstoMany('App\Models\Tag');
+        return $this->belongstoMany(Tag::class);
     }
-    
+
     public function campus()
     {
-        return $this->belongstoMany('App\Models\Campus');
+        return $this->belongstoMany(Campus::class);
     }
 
     public function message()

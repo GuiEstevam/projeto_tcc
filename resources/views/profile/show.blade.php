@@ -110,17 +110,16 @@
         <div class="modal-body">
           <form form action="/profile/request" method="POST" enctype="multipart/form-data">
             @csrf
-              <input type="hidden" class="form-control" id="requestedUser" name="requestedUser"
-                value={{ $User->id }}>
-            @foreach ($LoggedProjects as $LoggedProject)
-              <div class="form-group col-12">
-                <label for="title">Selecione um projeto:</label>
-                <select class="form-control" id="projectRequestId" name="projectRequest">
-                  <option value="" disabled></option>
+            <input type="hidden" class="form-control" id="requestedUser" name="requestedUser" value={{ $User->id }}>
+            <div class="form-group col-12">
+              <label for="title">Selecione um projeto:</label>
+              <select class="form-control" id="projectRequestId" name="projectRequest">
+                <option value="" disabled></option>
+                @foreach ($LoggedProjects as $LoggedProject)
                   <option value="{{ $LoggedProject->id }}">{{ $LoggedProject->name }}</option>
-                </select>
-              </div>
-            @endforeach
+                @endforeach
+              </select>
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
