@@ -12,13 +12,10 @@ class ExperienceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
 
-    public function storeExperience(Request $request){
-        if(!empty($request->id)){
+    public function storeExperience(Request $request)
+    {
+        if (!empty($request->id)) {
             $Experience = Experience::findOrFail($request->id);
 
             $Experience->update([
