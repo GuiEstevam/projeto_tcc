@@ -20,7 +20,7 @@
         <a class="nav-link active" data-bs-toggle="tab" href="#home">PROJETOS</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#menu1">PERFIS</a>
+        <a class="nav-link" data-bs-toggle="tab" href="#menu1">USUÁRIOS</a>
       </li>
     </ul>
 
@@ -63,8 +63,8 @@
           @if ($search)
             <h2>Buscando por: {{ $search }}</h2>
           @else
-            <h2>PROJETOS DISPONÍVEIS</h2>
-            <p class="subtitle">Veja os projetos que estão disponíveis</p>
+            <h2>USUÁRIOS DISPONÍVEIS</h2>
+            <p class="subtitle">Veja os usuários que estão disponíveis</p>
           @endif
           <div id="cards-container" class="row">
             @foreach ($users as $user)
