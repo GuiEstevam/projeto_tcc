@@ -9,16 +9,30 @@ use App\Models\Projeto;
 use App\Models\User;
 use App\Models\Tag;
 use App\Models\Campus;
+use App\Models\Profile;
 use Illuminate\Support\Facades\DB;
 
 class ProjetoController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        $user = auth()->user();
-        $Projeto = Projeto::all();
-        return view('welcome', ['Projeto' => $Projeto, 'user' => $user, 'users' => $users]);
+        $users = Profile::all();
+        $search = request('search');
+
+        if($search) {
+
+            $projeto = Projeto::where([
+                ['name', 'like', '%'.$search.'%']
+            ])->get();
+
+        } else {
+            $projeto = Projeto::all();
+        }        
+    
+        return view('welcome',[
+            'projetos' => $projeto, 
+            'search' => $search,
+            'users' => $users]);
     }
 
     public function create()
@@ -258,6 +272,6 @@ class ProjetoController extends Controller
 
     public function download($id)
     {
-        return response()->download(storage_path() . '\project\files\\' . $id);
+        return response()->download(storage_path() . '\project\files\\' . $id); 
     }
 }

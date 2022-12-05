@@ -67,17 +67,17 @@ class User extends Authenticatable
 
     public function projetos()
     {
-        return $this->hasMany('App\Models\Projeto');
+        return $this->hasMany(Projeto::class);
     }
 
     public function projetosAsParticipant()
     {
-        return $this->belongsToMany('App\Models\Projeto')->withPivot('situacao', 'type');
+        return $this->belongsToMany(Projeto::class)->withPivot('situacao', 'type');
     }
 
     public function experience()
     {
-        return $this->hasMany('App\Models\Experience');
+        return $this->hasMany(Experience::class);
     }
     
     public function profile(){
