@@ -11,6 +11,6 @@ class Campus extends Model
 
     public function CampusProjects()
     {
-        return $this->belongsToMany('App\Models\Projeto');
+        return $this->belongsToMany(Projeto::class);
     }
 }

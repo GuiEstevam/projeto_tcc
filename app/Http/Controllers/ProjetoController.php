@@ -19,20 +19,20 @@ class ProjetoController extends Controller
         $users = Profile::all();
         $search = request('search');
 
-        if($search) {
+        if ($search) {
 
             $projeto = Projeto::where([
-                ['name', 'like', '%'.$search.'%']
+                ['name', 'like', '%' . $search . '%']
             ])->get();
-
         } else {
             $projeto = Projeto::all();
-        }        
-    
-        return view('welcome',[
-            'projetos' => $projeto, 
+        }
+
+        return view('welcome', [
+            'projetos' => $projeto,
             'search' => $search,
-            'users' => $users]);
+            'users' => $users
+        ]);
     }
 
     public function create()
@@ -272,6 +272,6 @@ class ProjetoController extends Controller
 
     public function download($id)
     {
-        return response()->download(storage_path() . '\project\files\\' . $id); 
+        return response()->download(storage_path() . '\project\files\\' . $id);
     }
 }

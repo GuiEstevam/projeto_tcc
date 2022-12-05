@@ -67,7 +67,9 @@ class ProfileController extends Controller
     {
         $User = Auth()->user();
 
-        if (!empty($User->profile)) {
+        if ($User->role_id == 1) {
+            return redirect()->route('dashboard');
+        } else if (!empty($User->profile)) {
             return redirect()->route('dashboard');
         }
         $Tag = Tag::all();
@@ -172,10 +174,10 @@ class ProfileController extends Controller
         return back()->with('msg', 'Você agora é participante do projeto!');
     }
 
-    public function requestDeny($id){    
+    public function requestDeny($id)
+    {
         DB::update('delete from projeto_user where user_id = ? and situacao = 0 and type = 1', [$id]);
 
         return back()->with('msg', 'Você recusou a participação ao projeto');
     }
-
 }

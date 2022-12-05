@@ -42,7 +42,7 @@
                   <h5 class="card-title">{{ $projeto->name }}</h5>
                   <p class="card-participants">Tags:
                     @foreach ($projeto->tags as $item)
-                    {{ $item }}
+                      {{ $item }}
                     @endforeach
                   </p>
                   <a href="/projetos/{{ $projeto->id }}" class="btn btn-primary"> Saber mais </a>
@@ -68,19 +68,22 @@
           @endif
           <div id="cards-container" class="row">
             @foreach ($users as $user)
-              <div class="card col-md-3">
-                <img src="/img/profile_photo/{{ $user->profile_photo_path }}" alt="{{ $user->user->name }}">
-                <div class="card-body">
-                  <h5 class="card-title">{{ $user->user->name }}</h5>
-                  <p class="card-participants">Tags:
-                    @foreach ($user->tags as $item)
-                    {{ $item }}
-                    @endforeach
-                  </p>
-                  <a href="/profile/show/{{ $user->id }}" class="btn btn-primary"> Saber mais </a>
-                  </form>
+              @if ($user->user->role_id)
+                <h2>Orientadores</h2>
+                <div class="card col-md-3">
+                  <img src="/img/profile_photo/{{ $user->profile_photo_path }}" alt="{{ $user->user->name }}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ $user->user->name }}</h5>
+                    <p class="card-participants">Tags:
+                      @foreach ($user->tags as $item)
+                        {{ $item }}
+                      @endforeach
+                    </p>
+                    <a href="/profile/show/{{ $user->id }}" class="btn btn-primary"> Saber mais </a>
+                    </form>
+                  </div>
                 </div>
-              </div>
+              @endif
             @endforeach
             @if (count($users) == 0 && $search)
               <p>Não foi possível encontrar nenhum evento com {{ $search }}! <a href="/">Ver todos</a></p>

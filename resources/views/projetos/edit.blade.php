@@ -7,11 +7,11 @@
 {{-- @dd($Tag) --}}
 @extends('layouts.main')
 
-@section('title', 'Editando: '.$Projeto->name)
+@section('title', 'Editando: ' . $Projeto->name)
 
 @section('content')
   <div id="event-create-container" class="col-md-6 offset-md-3">
-    <h4>Editando: {{$Projeto->name}} </h4>
+    <h4>Editando: {{ $Projeto->name }} </h4>
     <form action="/projetos/update/{{ $Projeto->id }}" method="POST" enctype="multipart/form-data">
       @csrf
       @method('PUT')

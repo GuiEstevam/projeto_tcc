@@ -79,12 +79,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Experience::class);
     }
-    
-    public function profile(){
+
+    public function profile()
+    {
         return $this->hasOne(Profile::class);
     }
 
-    public function messages(){
+    public function messages()
+    {
         return $this->hasMany(Message::class);
     }
 }
